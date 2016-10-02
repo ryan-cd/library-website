@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-    
+        <title>Library Search</title>
+        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     </head>
     <body>
         <div class="header">
             <img src="../images/logo.png" class="logo" alt="logo">
             <div class="nav">
-                <ul>
+                <ul class="nav-list">
                     <li id="search"><a href="search.html">Search</a></li>
                     <li id="add"><a href="submission.html">Add a Library</a></li>
                     <li id="about"><a href="search.html">About</a></li>
@@ -17,16 +19,16 @@
         </div>
         
         <div class="content">
-            <div class="banner">
-                <img src=../images/banner.jpg class="banner" alt="banner">
+            <div id="banner">
+                <img src=../images/banner.jpg class="banner-image" alt="banner">
             </div>
-            <div class="search">
-                <h1> Find a library</h1>
+            <div id="search-box">
+                <h1 id="search-title">Find a library</h1>
                 <form action="search.html" method="get" name="search">
                     <input type="search" id="city" alt="city" value="Enter a city"> 
                     <input type="submit" id="search-button" alt="search-button" value="Go">
                 </form>
-                <a id="advanced-search-button">Advanced Search</a>
+                <a href="#" id="advanced-search-button">Advanced Search</a>
                 
                 <div class="advanced-search">
                     <form action="search.html" method="get" name="search">
