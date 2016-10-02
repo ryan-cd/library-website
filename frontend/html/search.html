@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+    </head>
+    <body>
+        <div class="header">
+            <img src="../images/logo.png" class="logo" alt="logo">
+            <div class="nav">
+                <ul>
+                    <li id="search"><a href="search.html">Search</a></li>
+                    <li id="add"><a href="submission.html">Add a Library</a></li>
+                    <li id="about"><a href="search.html">About</a></li>
+                    <li id="login"><a href="registration.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="banner">
+                <img src=../images/banner.jpg class="banner" alt="banner">
+            </div>
+            <div class="search">
+                <h1> Find a library</h1>
+                <form action="search.html" method="get" name="search">
+                    <input type="search" id="city" alt="city" value="Enter a city"> 
+                    <input type="submit" id="search-button" alt="search-button" value="Go">
+                </form>
+                <a id="advanced-search-button">Advanced Search</a>
+                
+                <div class="advanced-search">
+                    <form action="search.html" method="get" name="search">
+                    <input type="text" id="name" alt="name" value="Enter library name"> 
+                    <select name="rating" id="rating">
+                        <option value="1 Star">1 Star</option>
+                        <option value="2 Star">2 Star</option>
+                        <option value="3 Star">3 Star</option>
+                        <option value="4 Star">4 Star</option>
+                        <option value="5 Star">5 Star</option>
+                    </select>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="footer">
+            <hr>
+        </div>
+    </body>
+</html>
