@@ -67,6 +67,19 @@ ul.nav-list {
     margin-bottom: 2px;
     margin-left: auto;
     margin-right: auto;
+    box-sizing: border-box;
+}
+
+.form input[type=text]:focus {
+    border: 2px solid #990033;
+}
+
+.form input[type=submit]:focus {
+    border: 2px solid #990033;
+}
+
+.form select:focus {
+    border: 2px solid #990033;
 }
 
 .form select {
@@ -95,12 +108,5 @@ ul.nav-list {
     color: white;
 }
 
-#advanced-search-name + input[type="checkbox"]:unchecked {
-    display: none;
-}
-
-input[type="checkbox"]:checked + #advanced-search-name {
-    display:block;
-}
 
 
