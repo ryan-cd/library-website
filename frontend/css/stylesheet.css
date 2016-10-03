@@ -3,7 +3,7 @@ body {
 }
 
 img.logo {
-    height: 100px;
+    height: 40px;
     margin-left: auto;
     margin-right: auto;
     float: left;
@@ -29,24 +29,6 @@ img.logo {
     color: black;
 }
 
-ul.nav-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#search-box {
-    position: absolute;
-    width: 300px;
-    top: 50%;
-    left: 50%;
-    margin: -50px 0px 0 -150px;
-}
-
-#search-box h1 {
-    color: white;
-}
-
 #banner {
        
 }
@@ -56,3 +38,69 @@ ul.nav-list {
     min-width: 650px;
     min-height: 200px;
 }
+
+ul.nav-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form {
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    margin: -300px 0px 0px -150px;
+    
+}
+
+.form h1 {
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
+
+.form input[type=text] {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form select {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form input[type=submit] {
+    width: 100%;
+    height: 30px;
+    background-color: burlywood;
+    color: #990033;
+    font-size: 15px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form label {
+    color: white;
+}
+
+#advanced-search-name + input[type="checkbox"]:unchecked {
+    display: none;
+}
+
+input[type="checkbox"]:checked + #advanced-search-name {
+    display:block;
+}
+
+
