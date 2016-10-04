@@ -21,37 +21,25 @@
         <div class="content">
             <div id="banner">
                 <img src=../images/banner.jpg class="banner-image" alt="banner">
-            </div>
-            <div class="form">
-                <h1 id="search-title">Find a library</h1>
-                <form action="search.html" method="get" name="search">
-                    <input type="text" id="city" alt="city" value="Enter a city" name="city"> 
-                    <input type="checkbox" id="advanced-search-checkbox" value="Advanced Search">
-                    <label for="advanced-search-checkbox">Advanced Search</label>
-                    <input type="text" id="advanced-search-name" class="advanced-search" value="Enter library name" name="library-name"> 
-                    <select name="rating" id="advanced-search-rating" class="advanced-search">
-                        <option value="1 Star">1 Star</option>
-                        <option value="2 Star">2 Star</option>
-                        <option value="3 Star">3 Star</option>
-                        <option value="4 Star">4 Star</option>
-                        <option value="5 Star">5 Star</option>
-                    </select>
-                    <input type="submit" id="search-button" alt="search-button" value="Search">
-                </form>
-                
-                <!--div class="advanced-search">
+            
+                <span class="form vertical-form">
+                    <h1 id="search-title">Find a library</h1>
                     <form action="search.html" method="get" name="search">
-                    <input type="text" id="name" alt="name" value="Enter library name"> 
-                    <select name="rating" id="rating">
-                        <option value="1 Star">1 Star</option>
-                        <option value="2 Star">2 Star</option>
-                        <option value="3 Star">3 Star</option>
-                        <option value="4 Star">4 Star</option>
-                        <option value="5 Star">5 Star</option>
-                    </select>
+                        <input type="text" id="city" alt="city" value="Enter a city" name="city"> 
+                        <input type="checkbox" id="advanced-search-checkbox" value="Advanced Search">
+                        <label for="advanced-search-checkbox">Advanced Search</label>
+                        <input type="text" id="advanced-search-name" class="advanced-search" value="Enter library name" name="library-name"> 
+                        <select name="rating" id="advanced-search-rating" class="advanced-search">
+                            <option value="Minimum Rating">Minimum Rating</option>
+                            <option value="5 Star">5 Star</option>
+                            <option value="4 Star">4 Star</option>
+                            <option value="3 Star">3 Star</option>
+                            <option value="2 Star">2 Star</option>
+                            <option value="1 Star">1 Star</option>
+                        </select>
+                        <input type="submit" id="search-button" alt="search-button" value="Search">
                     </form>
-                </div-->
-                
+                </span>
             </div>
         </div>
         
@@ -59,7 +47,7 @@
             <hr>
             <p>Copyright © 2016 Ryan Davis</p>
             <ul class="nav-list">
-                <li id="about"><a href="search.html">About</a></li>
+                <li id="about-footer"><a href="search.html">About</a></li>
             </ul>
         </div>
     </body>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Library Search</title>
+        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header">
+            <img src="../images/logo.png" class="logo" alt="logo">
+            <div class="nav">
+                <ul class="nav-list">
+                    <li id="search"><a href="search.html">Search</a></li>
+                    <li id="add"><a href="submission.html">Add a Library</a></li>
+                    <li id="about"><a href="search.html">About</a></li>
+                    <li id="login"><a href="registration.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="searchbars">
+                <div class="form horizontal-form">
+                    <h1 id="search-title">Results</h1>
+                    <form action="search.html" method="get" name="search">
+                        <input type="text" id="city" alt="city" value="Enter a city" name="city">
+                        <input type="text" id="advanced-search-name" class="advanced-search" value="Enter library name" name="library-name"> 
+                        <select name="rating" id="advanced-search-rating" class="advanced-search">
+                            <option value="Minimum Rating">Minimum Rating</option>
+                            <option value="5 Star">5 Star</option>
+                            <option value="4 Star">4 Star</option>
+                            <option value="3 Star">3 Star</option>
+                            <option value="2 Star">2 Star</option>
+                            <option value="1 Star">1 Star</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="results">
+            
+               
+                <div class="result">
+                    <img src="../images/map.PNG" class="result-thumb">
+                    <div class="result-right">
+                        <a href="results_sample.html" class="result-title">Thode Library</a>
+                        <p class="result-description">Library description</p>
+                        <p class="result-description">1280 Main Street West, Hamilton, ON</p>
+                        <img src="../images/stars.png" class="result-rating">
+                    </div>
+                </div>
+                
+                <img src="../images/map.PNG" class="large-map-img">
+                
+            </div>
+            
+        
+            <div class="footer">
+                <br />
+                <hr>
+                <p>Copyright © 2016 Ryan Davis</p>
+                <ul class="nav-list">
+                    <li id="about-footer"><a href="search.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
