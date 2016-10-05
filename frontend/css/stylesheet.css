@@ -6,7 +6,6 @@ body {
 
 .content {
     clear: both;
-    height: 100%;
 }
 
 .spacer {
@@ -20,9 +19,22 @@ hr.result-separator {
 }
 
 .header {
-    width: 800px;
     margin: 0 auto;
 }
+
+@media (min-width: 800px) {
+    .header {
+        width: 800px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header {
+        width: 450px;
+    }
+}
+
+
 
 img.logo {
     height: 40px;
@@ -52,14 +64,29 @@ img.logo {
 }
 
 #banner {
-       
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 400px;
+    bottom: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../images/banner.jpg);
+    background-position: center;
+    position: relative;
 }
 
-#banner img {
-    width: 100%;
-    height: 100%;
-    min-width: 650px;
-    min-height: 200px;
+@media (min-height: 800px) {
+    #banner {
+        height: 600px;
+    }
+}
+
+@media (min-height: 1000px) {
+    #banner {
+        height: 800px;
+    }
 }
 
 ul.nav-list {
@@ -79,7 +106,17 @@ ul.nav-list {
     top: 30%;
     width: 300px;
     left: 50%;
-    margin: 0px 0px 0px -150px;
+    margin: 0px 0px 0px -170px; /* width is 300px with 20px padding on either side. 340/2 = 170 */
+}
+
+.form {
+    background: rgba(255, 238, 277, 0.2);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
 }
 
 .form h1 {
@@ -146,11 +183,13 @@ input[type=submit].horizontal-form,
 
 .footer {
     width: 200px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     font-size: 12px;
     clear: both;
+    bottom: 0px;
+    left: 50%;
+    margin: 0 0 0 -100px;
+    position: relative;
 }
 
 
@@ -189,6 +228,11 @@ input[type=submit].horizontal-form,
 
 .result-description {
     margin: 0;
+}
+
+.result-address {
+    margin: 0;
+    font-style: italic;
 }
 
 .result-rating {
