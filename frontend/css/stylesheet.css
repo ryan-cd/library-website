@@ -19,6 +19,11 @@ hr.result-separator {
     opacity: 0.3;
 }
 
+.header {
+    width: 800px;
+    margin: 0 auto;
+}
+
 img.logo {
     height: 40px;
     margin-left: auto;
