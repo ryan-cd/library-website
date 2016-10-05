@@ -1,10 +1,22 @@
 body {
     font-family: 'Lato', 'Helvetica', sans-serif;
     height: 100%;
+    background: #ffeee3;
 }
 
 .content {
+    clear: both;
     height: 100%;
+}
+
+.spacer {
+    height: 10px;
+    clear: left;
+}
+
+hr.result-separator {
+    width: 500px;
+    opacity: 0.3;
 }
 
 img.logo {
@@ -52,10 +64,9 @@ ul.nav-list {
 }
 
 .horizontal-form {
-    float: left;
-    display: inline;
-    
-    
+    width: 800px;
+    clear: both;
+    margin: 0 auto;
 }
 
 .vertical-form {
@@ -73,13 +84,10 @@ ul.nav-list {
 }
 
 .form input[type=text] {
-    width: 300px;
     height: 30px;
     padding-left: 5px;
     margin-top: 2px;
     margin-bottom: 2px;
-    margin-left: auto;
-    margin-right: auto;
     box-sizing: border-box;
 }
 
@@ -95,8 +103,19 @@ ul.nav-list {
     border: 2px solid #990033;
 }
 
-.form select {
+.horizontal-form input[type=text],
+input[type=submit].horizontal-form,
+.horizontal-form select{
+    width: 264px;
+}
+
+.vertical-form input[type=text],
+.vertical-form input[type=submit],
+.vertical-form select{
     width: 300px;
+}
+
+.form select {
     height: 30px;
     padding-left: 5px;
     margin-top: 2px;
@@ -106,7 +125,6 @@ ul.nav-list {
 }
 
 .form input[type=submit] {
-    width: 100%;
     height: 30px;
     background-color: burlywood;
     color: #990033;
@@ -135,7 +153,7 @@ ul.nav-list {
 
 .results {
     margin-top: 0px;
-    height: 600px;
+    height: 400px;
     width: 800px;
     margin: 0 auto;
     clear: both;
@@ -176,6 +194,6 @@ ul.nav-list {
 
 .large-map-img{
     float: right;
-    height: 300px;
-    width: 300px;
+    height: 264px;
+    width: 264px;
 }
