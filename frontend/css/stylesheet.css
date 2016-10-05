@@ -57,6 +57,7 @@ img.logo {
 
 .nav a {
     color: #990033;
+    text-decoration: none;
 }
 
 .nav a:hover {
@@ -68,7 +69,7 @@ img.logo {
     top: 0px;
     left: 0px;
     right: 0px;
-    height: 400px;
+    height: 500px;
     bottom: 500px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -109,6 +110,10 @@ ul.nav-list {
     margin: 0px 0px 0px -170px; /* width is 300px with 20px padding on either side. 340/2 = 170 */
 }
 
+.double-form {
+    top: 10%;
+}
+
 .form {
     background: rgba(255, 238, 277, 0.2);
     padding-left: 20px;
@@ -125,7 +130,9 @@ ul.nav-list {
     text-shadow: 2px 2px black;
 }
 
-.form input[type=text] {
+.form input[type=text],
+.form input[type=email],
+.form input[type=password] {
     height: 30px;
     padding-left: 5px;
     margin-top: 2px;
@@ -152,6 +159,8 @@ input[type=submit].horizontal-form,
 }
 
 .vertical-form input[type=text],
+.vertical-form input[type=password],
+.vertical-form input[type=email],
 .vertical-form input[type=submit],
 .vertical-form select{
     width: 300px;
