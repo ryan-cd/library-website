@@ -80,7 +80,7 @@ img.logo {
 
 @media (min-height: 800px) {
     #banner {
-        height: 600px;
+        height: 650px;
     }
 }
 
@@ -144,15 +144,11 @@ ul.nav-list {
     }
 }
 
-.double-form {
-    top: 10%;
-}
-
 .form {
 
 }
 
-.form h1 {
+h1 {
     color: white;
     text-align: center;
     text-shadow: 2px 2px black;
@@ -244,16 +240,38 @@ input[type=submit].horizontal-form,
 
 .results {
     margin-top: 0px;
-   
-    width: 800px;
+    background: rgba(255, 238, 277, 0.2);
+    border-style: solid;
+    border-color: white;
+    padding: 20px;
     margin: 0 auto;
     clear: both;
     overflow: auto;
+    color: white;
+}
+
+@media (max-width: 800px) {
+    .results {
+        width: 530px;
+    }
+    .result {
+        clear: both;
+    }
+}
+
+@media (min-width: 800px) {
+    .results {
+        width: 750px;
+    }
+    
+    
 }
 
 .result {
-    height: 100px;
+    height: 150px;
     width: 500px;
+    color: black;
+    background: #ffeee3;
 }
 
 .result-right {
