@@ -104,10 +104,10 @@ ul.nav-list {
 
 .vertical-form {
     position: absolute;
-    top: 30%;
+    
     width: 300px;
     left: 50%;
-    margin: 0px 0px 0px -170px; /* width is 300px with 20px padding on either side. 340/2 = 170 */
+    
     background: rgba(255, 238, 277, 0.2);
     padding-left: 20px;
     padding-right: 20px;
@@ -115,6 +115,33 @@ ul.nav-list {
     border-style: solid;
     border-color: white;
     border-width: 1px;
+}
+
+.vertical-form-center {
+    top: 30%;
+    margin: 0px 0px 0px -170px; /* width is 300px with 20px padding on either side. 340/2 = 170 */
+}
+
+.vertical-form-left {
+    top: 30%;
+    margin: 0px 0px 0px -350px;
+}
+
+.vertical-form-right {
+    top: 30%;
+    margin: 0px 0px 0px 0px; 
+}
+
+@media (max-width: 800px) {
+    .vertical-form-left {
+        top: 5%;
+        margin: 0px 0px 0px -170px;
+    }
+
+    .vertical-form-right {
+        top: 50%;
+        margin: 0px 0px 0px -170px; 
+    }
 }
 
 .double-form {
@@ -259,9 +286,15 @@ input[type=submit].horizontal-form,
 }
 
 .large-map-img{
-    float: right;
     height: 264px;
     width: 264px;
+    float: left;
+}
+
+@media screen and (min-width: 800px) {
+    .large-map-img {
+        float: right;
+    }
 }
 
 
