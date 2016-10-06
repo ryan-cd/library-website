@@ -108,13 +108,6 @@ ul.nav-list {
     width: 300px;
     left: 50%;
     margin: 0px 0px 0px -170px; /* width is 300px with 20px padding on either side. 340/2 = 170 */
-}
-
-.double-form {
-    top: 10%;
-}
-
-.form {
     background: rgba(255, 238, 277, 0.2);
     padding-left: 20px;
     padding-right: 20px;
@@ -122,6 +115,14 @@ ul.nav-list {
     border-style: solid;
     border-color: white;
     border-width: 1px;
+}
+
+.double-form {
+    top: 10%;
+}
+
+.form {
+
 }
 
 .form h1 {
@@ -212,7 +213,7 @@ input[type=submit].horizontal-form,
 
 .results {
     margin-top: 0px;
-    height: 400px;
+   
     width: 800px;
     margin: 0 auto;
     clear: both;
@@ -227,11 +228,12 @@ input[type=submit].horizontal-form,
 .result-right {
     float: left;
     margin-left: 4px;
+    width: 80%;
 }
 
 .result-thumb {
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: 15%;
     float: left;
     margin: auto;
 }
@@ -258,6 +260,14 @@ input[type=submit].horizontal-form,
 
 .large-map-img{
     float: right;
+    height: 264px;
+    width: 264px;
+}
+
+
+
+.large-profile-img{
+    float: left;
     height: 264px;
     width: 264px;
 }
