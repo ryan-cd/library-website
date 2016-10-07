@@ -228,6 +228,7 @@ input[type=submit].horizontal-form,
 
 .form label {
     color: white;
+    text-shadow: 1px 1px black;
 }
 
 .footer {
