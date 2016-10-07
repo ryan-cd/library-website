@@ -148,6 +148,11 @@ ul.nav-list {
         top: 50%;
         margin: 0px 0px 0px -170px; 
     }
+    
+    .horizontal-form {
+        width: 530px;
+        margin: 0 auto;
+    }
 }
 
 .form {
