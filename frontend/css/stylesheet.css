@@ -36,11 +36,17 @@ hr.result-separator {
 
 
 
-img.logo {
+h3.logo {
     height: 40px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0px 5px auto auto;
+    width: 60px;
+    color: #990033;
+    background: rgba(255, 238, 277, 0.6);
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
     float: left;
+    top: 0%;
 }
 
 .nav {
@@ -243,6 +249,7 @@ input[type=submit].horizontal-form,
     background: rgba(255, 238, 277, 0.2);
     border-style: solid;
     border-color: white;
+    border-width: 1px;
     padding: 20px;
     margin: 0 auto;
     clear: both;
@@ -302,7 +309,7 @@ input[type=submit].horizontal-form,
 }
 
 .result-rating {
-    height: 30px;
+    height: 40px;
     width: 100px;
     clear: both;
 }
