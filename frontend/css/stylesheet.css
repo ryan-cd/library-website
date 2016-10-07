@@ -288,7 +288,7 @@ input[type=submit].horizontal-form,
 
 /* This is the image associated with the result */
 .result-thumb {
-    height: 70px;
+    height: 80px;
     width: 15%;
     float: left;
     margin: auto;
