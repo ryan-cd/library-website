@@ -5,6 +5,7 @@
         <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" />
         <link href="../css/normalize.css" type="text/css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <script src="../javascript/dynamics.js"></script>
     </head>
     <body>
         <div class="header">
@@ -24,18 +25,18 @@
                 <!-- The two following forms will appear on the left and right sides of the page. -->
                 <div class="form vertical-form vertical-form-left">
                     <h1>Login</h1>
-                    <form action="search.html" method="get" name="search">
-                        <input type="email" placeholder="Username" name="username"> 
-                        <input type="password" placeholder="Password" name="password">
+                    <form action="search.html" method="get" name="search" onsubmit="return validateLogin();">
+                        <input type="email" id="login-email" placeholder="Username" name="login-email"> 
+                        <input type="password" id="login-password" placeholder="Password" name="login-password">
                         <input type="submit" value="Login">
                     </form>
                 </div>
                 <div class="form vertical-form vertical-form-right">
                     <h1>Register</h1>
-                    <form action="search.html" method="get" name="search">
-                        <input type="email" placeholder="Username" name="registration-username"> 
-                        <input type="password" placeholder="Password" name="registration-password">
-                        <input type="password" placeholder="Confirm Password" name="registration-password-confirm">
+                    <form action="search.html" method="get" name="search" onsubmit="return validateRegistration();">
+                        <input type="email" id="registration-email" placeholder="Username" name="registration-username"> 
+                        <input type="password" id="registration-password" placeholder="Password" name="registration-password">
+                        <input type="password" id="registration-password-confirm" placeholder="Confirm Password" name="registration-password-confirm">
                         <input type="submit" value="Register">
                     </form>
                 </div>

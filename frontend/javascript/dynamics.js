@@ -1,11 +1,8 @@
 'use strict';
 
-function advancedSearchToggle() {
-    alert("Toggle!");
-}
-
+/* START ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
 function getLocation() {
-    if(navigator.geolocation) {
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocationCB, locationErrorCB);
     } else {
         alert("This browser doesn't support geolocation.");
@@ -17,7 +14,7 @@ function setLocationCB(location) {
 }
 
 function locationErrorCB(error) {
-    switch(error.code) {
+    switch (error.code) {
         case error.TIMEOUT:
             alert("Location request timed out");
             break;
@@ -32,3 +29,37 @@ function locationErrorCB(error) {
             break;
     }
 }
+
+/* END ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
+
+/* START ~~~~~~~~~~~~~ VALIDATION FUNCTIONS ~~~~~~~~~~~*/
+
+function validateLogin() {
+    var returnValue = true;
+    if (!validateEmail(document.getElementById(
+"login-email").value)) {
+        alert("Email invalid");
+        returnValue = false;
+    } else if (!validatePassword(document.getElementById(
+"login-password").value)) {
+        alert("Password invalid");
+        returnValue = false;
+    }
+    return returnValue;
+}
+
+function validateRegistration() {
+    
+}
+
+function validateEmail(email) {
+    var valid = true;
+    valid = valid && (email !== null && email !== "");
+    return valid;
+}
+
+function validatePassword(password) {
+    return password !== null && password !== "";
+}
+
+/* END ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
