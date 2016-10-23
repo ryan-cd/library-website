@@ -38,28 +38,42 @@ function validateLogin() {
     var returnValue = true;
     if (!validateEmail(document.getElementById(
 "login-email").value)) {
-        alert("Email invalid");
         returnValue = false;
     } else if (!validatePassword(document.getElementById(
 "login-password").value)) {
-        alert("Password invalid");
         returnValue = false;
     }
     return returnValue;
 }
 
 function validateRegistration() {
-    
+    var returnValue = true; 
+    if (document.getElementById("registration-password").value !== document.getElementById("registration-password-confirm").value) {
+        alert("The two passwords must match")
+        returnValue = returnValue && false;
+    }
+    returnValue = returnValue && validateEmail(document.getElementById("registration-email").value);
+    returnValue = returnValue && validatePassword(document.getElementById("registration-password").value);
+    return returnValue;
 }
 
 function validateEmail(email) {
     var valid = true;
-    valid = valid && (email !== null && email !== "");
+    // The following regular expression was taken from the course slides (Lecture 6)
+    valid = valid &&(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email));
+    
+    if (!valid) {
+        alert("Please enter a valid email address");
+    }
     return valid;
 }
 
 function validatePassword(password) {
-    return password !== null && password !== "";
+    if (password == null || password == "") {
+        alert("Please enter a password");
+        return false;
+    } 
+    return true;
 }
 
 /* END ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
