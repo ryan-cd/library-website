@@ -26,17 +26,22 @@
                 <div class="form vertical-form vertical-form-left">
                     <h1>Login</h1>
                     <form action="search.html" method="get" name="search" onsubmit="return validateLogin();">
-                        <input type="email" id="login-email" placeholder="Username" name="login-email"> 
+                        <input type="email" id="login-email" placeholder="Email" name="login-email">
+                        <p id="login-email-error"></p>
                         <input type="password" id="login-password" placeholder="Password" name="login-password">
+                        <p id="login-password-error"></p>
                         <input type="submit" value="Login">
                     </form>
                 </div>
                 <div class="form vertical-form vertical-form-right">
                     <h1>Register</h1>
                     <form action="search.html" method="get" name="search" onsubmit="return validateRegistration();">
-                        <input type="email" id="registration-email" placeholder="Username" name="registration-username"> 
+                        <input type="email" id="registration-email" placeholder="Email" name="registration-username"> 
+                        <p id="registration-email-error"></p>
                         <input type="password" id="registration-password" placeholder="Password" name="registration-password">
+                        <p id="registration-password-error"></p>
                         <input type="password" id="registration-password-confirm" placeholder="Confirm Password" name="registration-password-confirm">
+                        <p id="registration-password-confirm-error"></p>
                         <input type="submit" value="Register">
                     </form>
                 </div>

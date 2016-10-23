@@ -239,6 +239,14 @@ input[type=submit].horizontal-form,
     text-shadow: 1px 1px black;
 }
 
+.form p {
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-shadow: 2px 2px black;
+    text-emphasis: 1;
+}
+
 
 /* Begin subsection for results and reviews */
 
