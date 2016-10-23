@@ -10,7 +10,7 @@ function getLocation() {
 }
 
 function setLocationCB(location) {
-    document.getElementById("city-search").value = location.coords.latitude + ", " + location.coords.longitude;
+    document.getElementById("library-location").value = location.coords.latitude + ", " + location.coords.longitude;
 }
 
 function locationErrorCB(error) {
@@ -97,9 +97,8 @@ function validateRegistration() {
 }
 
 function validateEmail(email) {
-    var valid = true;
     // The following regular expression was taken from the course slides (Lecture 6)
-    valid = valid &&(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email));
+    var valid = (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email));
     
     return valid;
 }
@@ -111,4 +110,53 @@ function validatePassword(password) {
     return true;
 }
 
-/* END ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
+function validateLibrarySubmission() {
+    var numErrors = 0;
+    if (!(check(nonEmpty, document.getElementById("library-name").value, "library-name-error", "Please enter a name."))) {
+        numErrors++;
+    }
+    
+    if(!(check(nonEmpty, document.getElementById("library-description").value, "library-description-error", "Please enter a description."))) {
+        numErrors++;
+    }
+    
+    if(!(check(atLeast10Chars, document.getElementById("library-description").value, "library-description-error", "Minimum 10 characters"))) {
+        numErrors++;
+    }
+    
+    if(!(check(nonEmpty, document.getElementById("library-location").value, "library-location-error", "Please enter a location."))) {
+        numErrors++;
+    }
+    
+    if(!(check(isCoordinatePair, document.getElementById("library-location").value, "library-location-error", "Please enter valid coordinates."))) {
+        numErrors++;
+    }
+    
+    return numErrors === 0;
+    
+}
+
+function check(checkFunction, value, errorElementId, message) {
+    var valid = checkFunction(value);
+    if (!valid) {
+        document.getElementById(errorElementId).innerHTML = message;
+    } else {
+        document.getElementById(errorElementId).innerHTML = "";
+    }
+    return valid;
+}
+
+function nonEmpty(value) {
+    return value !== "";
+}
+
+function atLeast10Chars(value) {
+    return value.length >= 10;
+}
+
+function isCoordinatePair(value) {
+    // Attribution: Coordinates regex is from:
+    // http://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    return /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(value);
+}
+/* END ~~~~~~~~~~~~~ VALIDATION FUNCTIONS ~~~~~~~~~~~*/
