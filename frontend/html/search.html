@@ -2,13 +2,15 @@
 <html>
     <head>
         <title>Library Search</title>
-        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" />
-        <link href="../css/normalize.css" type="text/css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" /> <!-- Styles for the site -->
+        <link href="../css/normalize.css" type="text/css" rel="stylesheet" /> <!-- Normalizes css accross browsers -->
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> <!-- Site font -->
     </head>
+    
     <body>
         <div class="header">
             <h3 class="logo">Library Search</h3>
+            <!-- The nav bar is a list of simple links -->
             <div class="nav">
                 <ul class="nav-list">
                     <li id="search"><a href="search.html">Search</a></li>
@@ -20,12 +22,13 @@
         </div>
         
         <div class="content">
+            <!-- The banner class is the resizing wrapper image that surrounds the whole site -->
             <div id="banner">
                 <div class="form vertical-form vertical-form-center">
                     <h1 id="search-title">Find a library</h1>
                     <form action="search.html" method="get" name="search">
-                        <input type="text" id="city" placeholder="Enter a city" name="city"> 
-                        <input type="checkbox" id="advanced-search-checkbox" value="Advanced Search" checked>
+                        <input type="text" id="city" placeholder="Enter a city" name="city">
+                        <input type="checkbox" id="advanced-search-checkbox" value="Advanced Search" checked> 
                         <label for="advanced-search-checkbox">Advanced Search</label>
                         <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="library-name"> 
                         <select name="rating" id="advanced-search-rating" class="advanced-search">
@@ -43,7 +46,7 @@
         </div>
         
         <div class="footer">
-            <hr/>
+            <hr />
             <p>Copyright (c) 2016 Ryan Davis</p>
             <ul class="nav-list">
                 <li id="about-footer"><a href="#">About</a></li>
