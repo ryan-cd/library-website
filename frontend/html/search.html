@@ -5,6 +5,7 @@
         <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" /> <!-- Styles for the site -->
         <link href="../css/normalize.css" type="text/css" rel="stylesheet" /> <!-- Normalizes css accross browsers -->
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> <!-- Site font -->
+        <script src="../javascript/dynamics.js"></script>
     </head>
     
     <body>
@@ -27,9 +28,9 @@
                 <div class="form vertical-form vertical-form-center">
                     <h1 id="search-title">Find a library</h1>
                     <form action="search.html" method="get" name="search">
-                        <input type="text" id="city" placeholder="Enter a city" name="city">
-                        <input type="checkbox" id="advanced-search-checkbox" value="Advanced Search" checked> 
-                        <label for="advanced-search-checkbox">Advanced Search</label>
+                        <input type="text" id="city-search" placeholder="Enter a city" name="city">
+                        <input type="checkbox" id="my-location-checkbox" value="Use my location"  onclick="getLocation()"> 
+                        <label for="my-location-checkbox">Use my location</label>
                         <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="library-name"> 
                         <select name="rating" id="advanced-search-rating" class="advanced-search">
                             <option value="Minimum rating">Minimum Rating</option>
