@@ -322,14 +322,14 @@ input[type=submit].horizontal-form,
     clear: both;
 }
 
-.large-map-img{
+#map {
     height: 264px;
     width: 264px;
     float: left;
 }
 
 @media (min-width: 800px) {
-    .large-map-img {
+    #map {
         float: right;
     }
 }
