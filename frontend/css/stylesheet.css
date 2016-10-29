@@ -107,7 +107,8 @@ ul.nav-list {
     }
 }
 
-h1 {
+/* Styles the main header elements */
+.main-header {
     color: white;
     text-align: center;
     text-shadow: 2px 2px black;
@@ -260,7 +261,6 @@ input[type=submit].horizontal-form,
     padding: 20px;
     margin: 0 auto;
     clear: both;
-    color: white;
 }
 
 /* The results get a smaller width when the window resizes */

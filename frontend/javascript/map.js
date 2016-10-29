@@ -22,11 +22,32 @@ function initComboMap() {
     
     var thodeMarker = new google.maps.Marker({
         position: thode,
-        map: map
+        map: map,
+        title: 'Thode Library'
     });
     
     var healthSciMarker = new google.maps.Marker({
         position: healthSci,
         map: map
+    });
+    
+    var contentString = '<div id="content">' +
+                            '<div id="siteNotice">' +
+                                '<h2 id="firstHeading" class="firstHeading">H.G. Thode Library</h1>' +
+                                '<div id="bodyContent">' +
+                                    '<p>Engineering and Sciences Library</p>' +
+                                '</div>' + 
+                            '</div>' +
+                        '</div>';
+    var infoWindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    
+    thodeMarker.addListener('click', function() {
+        infoWindow.open(map, thodeMarker);
+    });
+    
+    healthSciMarker.addListener('click', function() {
+        infoWindow.open(map, healthSciMarker);
     });
 }
