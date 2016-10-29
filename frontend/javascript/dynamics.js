@@ -3,7 +3,12 @@
 /* START ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setLocationCB, locationErrorCB);
+        if (document.getElementById("my-location-checkbox").checked){
+            navigator.geolocation.getCurrentPosition(setLocationCB, locationErrorCB);
+        } else {
+            document.getElementById("library-location").value = "";
+        }
+        
     } else {
         alert("This browser doesn't support geolocation.");
     }
