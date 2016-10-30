@@ -130,7 +130,6 @@ function validateLibrarySubmission() {
 The function will return true if the validation passes. Otherwise it will add the error message to the 
 form, and return false */
 function check(checkFunction, value, errorElementId, message) {
-    console.log(errorElementId + " " + message);
     var valid = checkFunction(value);
     if (!valid) {
         document.getElementById(errorElementId).innerHTML = message;
