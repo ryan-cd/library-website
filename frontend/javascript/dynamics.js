@@ -1,9 +1,10 @@
 'use strict';
 
 /* START ~~~~~~~~~~~~~ LOCATION FUNCTIONS ~~~~~~~~~~~*/
+/* When the user checks the box, their location coordinates get filled into the location box */
 function getLocation() {
     if (navigator.geolocation) {
-        if (document.getElementById("my-location-checkbox").checked){
+        if (document.getElementById("my-location-checkbox").checked) {
             navigator.geolocation.getCurrentPosition(setLocationCB, locationErrorCB);
         } else {
             document.getElementById("library-location").value = "";
@@ -14,10 +15,12 @@ function getLocation() {
     }
 }
 
+/* This function takes a pair of coordnates, and fills them into the location field on the form */
 function setLocationCB(location) {
     document.getElementById("library-location").value = location.coords.latitude + ", " + location.coords.longitude;
 }
 
+/* This function alerts the user if there was a geolocation error */
 function locationErrorCB(error) {
     switch (error.code) {
         case error.TIMEOUT:
@@ -39,68 +42,54 @@ function locationErrorCB(error) {
 
 /* START ~~~~~~~~~~~~~ VALIDATION FUNCTIONS ~~~~~~~~~~~*/
 
+/* This function validates all the fields for login */
 function validateLogin() {
     var returnValue = true;
-    // Validate the Email field
-    if (!validateEmail(document.getElementById(
-"login-email").value)) {
-        if (document.getElementById(
-"login-email").value === "") {
-            document.getElementById("login-email-error").innerHTML = "Please enter an email address.";
-        } else {
-            document.getElementById("login-email-error").innerHTML = "Email format is not valid";
-        }
+    
+    /* These functions check that the email is non empty, and that it is valid. The appropriate error will be filled in
+    to the form by the check function */
+    if (!check(nonEmpty, document.getElementById("login-email").value, "login-email-error", "Please enter an email address")) {
+        returnValue = false;
+    } else if (!check(validateEmail, document.getElementById("login-email").value, "login-email-error", "Email format is not valid")) {
         returnValue = false;
     } 
-    // Clear the field if there was no error
-    else 
-    {
-        document.getElementById("login-email-error").innerHTML = "";
-    }
     
-    //Validate the password field
-    if (!validatePassword(document.getElementById(
-"login-password").value)) {
-        document.getElementById("login-password-error").innerHTML = "Please enter a password";
+    /* Check whether the password field is non empty. Show the error message if needed */
+    if (!check(nonEmpty, document.getElementById("login-password").value, "login-password-error", "Please enter a password")) {
         returnValue = false;
-    }
-    // Clear the field if there was no error
-    else 
-    {
-        document.getElementById("login-password-error").innerHTML = "";
     }
     return returnValue;
 }
 
+/* This function validates all fields in the Registration box */
 function validateRegistration() {
-    var returnValue = true; 
-    if (document.getElementById("registration-password").value !== document.getElementById("registration-password-confirm").value) {
-        document.getElementById("registration-password-confirm-error").innerHTML = "Passwords do not match.";
+    var returnValue = true;
+    
+    /* Check if password and confirm password match */
+    if (!check(
+        function(password) { return password === document.getElementById("registration-password-confirm").value },
+        document.getElementById("registration-password").value,
+        "registration-password-confirm-error",
+        "Passwords do not match")) {
         returnValue = false;
-    } else {
-         document.getElementById("registration-password-confirm-error").innerHTML = "";
     }
     
-    if (!(validateEmail(document.getElementById("registration-email").value))) {
-        if (document.getElementById("registration-email").value === "") {
-            document.getElementById("registration-email-error").innerHTML = "Please enter an email";
-        } else {
-            document.getElementById("registration-email-error").innerHTML = "Email format is invalid";
-        }
+    /* Ensure the email field is filled out and valid */
+    if (!check(nonEmpty, document.getElementById("registration-email").value, "registration-email-error", "Please enter an email address")) {
         returnValue = false;
-    } else {
-         document.getElementById("registration-email-error").innerHTML = "";
+    } else if (!check(validateEmail, document.getElementById("registration-email").value, "registration-email-error", "Email format is not valid")) {
+        returnValue = false;
+    } 
+    
+    /* Ensures the password is filled out */
+    if (!check(nonEmpty, document.getElementById("registration-password").value, "registration-password-error", "Please enter a password")) {
+        returnValue = false;
     }
     
-    if(!(validatePassword(document.getElementById("registration-password").value))) {
-        document.getElementById("registration-password-error").innerHTML = "Please enter a password";
-        returnValue = false;
-    } else {
-        document.getElementById("registration-password-error").innerHTML = "";
-    }
     return returnValue;
 }
 
+/* Function returns true when the input email is valid */
 function validateEmail(email) {
     // The following regular expression was taken from the course slides (Lecture 6)
     var valid = (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/.test(email));
@@ -108,40 +97,40 @@ function validateEmail(email) {
     return valid;
 }
 
-function validatePassword(password) {
-    if (password === null || password === "") {
-        return false;
-    }
-    return true;
-}
-
+/* This function validates all fields in the library submission form. 
+Any errors will be displayed within the form */
 function validateLibrarySubmission() {
     var numErrors = 0;
     if (!(check(nonEmpty, document.getElementById("library-name").value, "library-name-error", "Please enter a name."))) {
         numErrors++;
     }
     
-    if(!(check(nonEmpty, document.getElementById("library-description").value, "library-description-error", "Please enter a description."))) {
+    if (!(check(nonEmpty, document.getElementById("library-description").value, "library-description-error", "Please enter a description."))) {
         numErrors++;
     }
     
-    if(!(check(atLeast10Chars, document.getElementById("library-description").value, "library-description-error", "Minimum 10 characters"))) {
+    /* Library descriptions must be at least 10 characters */
+    if (!(check(atLeast10Chars, document.getElementById("library-description").value, "library-description-error", "Minimum 10 characters"))) {
         numErrors++;
     }
     
-    if(!(check(nonEmpty, document.getElementById("library-location").value, "library-location-error", "Please enter a location."))) {
+    if (!(check(nonEmpty, document.getElementById("library-location").value, "library-location-error", "Please enter a location."))) {
         numErrors++;
     }
     
-    if(!(check(isCoordinatePair, document.getElementById("library-location").value, "library-location-error", "Please enter valid coordinates."))) {
+    /* Coordinates entered by the user must be valid */
+    if (!(check(isCoordinatePair, document.getElementById("library-location").value, "library-location-error", "Please enter valid coordinates."))) {
         numErrors++;
     }
     
     return numErrors === 0;
-    
 }
 
+/* Funtion inputs: (check to perform, input to validate, which html id should show the error message, the error message).
+The function will return true if the validation passes. Otherwise it will add the error message to the 
+form, and return false */
 function check(checkFunction, value, errorElementId, message) {
+    console.log(errorElementId + " " + message);
     var valid = checkFunction(value);
     if (!valid) {
         document.getElementById(errorElementId).innerHTML = message;
@@ -151,6 +140,7 @@ function check(checkFunction, value, errorElementId, message) {
     return valid;
 }
 
+/* Return true if input is not empty */
 function nonEmpty(value) {
     return value !== "";
 }
@@ -159,6 +149,7 @@ function atLeast10Chars(value) {
     return value.length >= 10;
 }
 
+/* Returns true if coordinates are valid */
 function isCoordinatePair(value) {
     // Attribution: Coordinates regex is from:
     // http://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
