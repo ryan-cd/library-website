@@ -2,10 +2,10 @@
 <html lang="en">
     <head>
         <title>Library Search</title>
-        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" /> <!-- Styles for the site -->
-        <link href="../css/normalize.css" type="text/css" rel="stylesheet" /> <!-- Normalizes css accross browsers -->
+        <link href="css/stylesheet.css" type="text/css" rel="stylesheet" /> <!-- Styles for the site -->
+        <link href="css/normalize.css" type="text/css" rel="stylesheet" /> <!-- Normalizes css accross browsers -->
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> <!-- Site font -->
-        <script src="../javascript/dynamics.js"></script>
+        <script src="javascript/dynamics.js"></script>
         <meta charset="UTF-8">
     </head>
     

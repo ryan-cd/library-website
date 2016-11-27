@@ -2,11 +2,11 @@
 <html lang="en">
     <head>
         <title>Library Search</title>
-        <link href="../css/stylesheet.css" type="text/css" rel="stylesheet" />
-        <link href="../css/normalize.css" type="text/css" rel="stylesheet" />
+        <link href="css/stylesheet.css" type="text/css" rel="stylesheet" />
+        <link href="css/normalize.css" type="text/css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <script src="../javascript/map.js"></script>
-        <script src="../javascript/mapAPIKey.js"></script>
+        <script src="javascript/map.js"></script>
+        <script src="javascript/mapAPIKey.js"></script>
         <meta charset="UTF-8">
     </head>
     <body>
@@ -29,9 +29,9 @@
             <div class="spacer"></div>
             <!-- The review section and reviews function the same way as the result section and results from registration_sample.html -->
             <div class="results">
-                <a href="../html/results_sample.html" class="back-link">Back to results</a>
+                <a href="results_sample.php" class="back-link">Back to results</a>
                 <h1 class="main-header">Thode Library</h1>
-                <img src="../images/thode.jpg" class="large-profile-img" alt="thode library">
+                <img src="images/thode.jpg" class="large-profile-img" alt="thode library">
                 
                 <div id="map"></div>
                 <!-- 
@@ -47,10 +47,10 @@
                 <div class="spacer"></div>
                 <div class="spacer"></div>
                 <div class="result">
-                    <img src="../images/../images/woman.jpg" class="result-thumb" alt="user">
+                    <img src="images/woman.jpg" class="result-thumb" alt="user">
                     <div class="result-right">
-                        <a href="individual_sample.html" class="result-title">user91</a>
-                        <img src="../images/full-stars.png" class="result-rating" alt="rating">
+                        <a href="individual_sample.php" class="result-title">user91</a>
+                        <img src="images/full-stars.png" class="result-rating" alt="rating">
                         <p class="result-description">Great study area!</p>
                         <p class="result-description">I come here all the time when studying for finals.  There are lots of seats, probably the most seating out of all the McMaster libraries.</p>
                     </div>

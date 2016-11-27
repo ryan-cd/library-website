@@ -55,7 +55,7 @@ function drawMap() {
 function createInfoString (name, description) {
     return '<div id="content">' +
                 '<div id="siteNotice">' +
-                    '<h2><a href="../html/individual_sample.html">' + name + '</a></h1>' +
+                    '<h2><a href="individual_sample.php">' + name + '</a></h1>' +
                     '<div>' +
                         '<p>' + description + '</p>' +
                     '</div>' + 
