@@ -26,7 +26,7 @@
                 <!-- The two following forms will appear on the left and right sides of the page. -->
                 <div class="form vertical-form vertical-form-left">
                     <h1 class="main-header">Login</h1>
-                    <form action="search.html" method="get" name="search" onsubmit="return validateLogin();">
+                    <form method="post" name="search" onsubmit="return validateLogin();">
                         <input type="email" id="login-email" placeholder="Email" name="login-email">
                         <p id="login-email-error"></p>
                         <input type="password" id="login-password" placeholder="Password" name="login-password">
@@ -48,7 +48,28 @@
                 </div>
             </div>
         </div>
-        
+        <?php require 'php-inc/database.php';
+        if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
+            try {
+                $pdo = new PDO($connection,$username,$password);
+                $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                $stmt->bindValue(':email', $_POST['login-email']);
+                $stmt->bindValue(':password', $_POST['login-password']);
+                $stmt->execute();  
+                $errors = $stmt->errorInfo();
+                
+                foreach ($stmt as $row) {
+                    if ($row["count"] == 1) {
+                        echo "Login valid";
+                    } else {
+                        echo "Login invalid";
+                    }
+                }
+            } catch (PDOException $e) {
+                die ("Database error. ".$e);
+            }
+        }
+        ?>
         <div class="footer">
             <hr/>
             <p>Copyright (c) 2016 Ryan Davis</p>
