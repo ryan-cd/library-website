@@ -13,10 +13,10 @@
             <h3 class="logo">Library Search</h3>
             <div class="nav">
                 <ul class="nav-list">
-                    <li id="search"><a href="search.html">Search</a></li>
-                    <li id="add"><a href="submission.html">Add a Library</a></li>
-                    <li id="about"><a href="search.html">About</a></li>
-                    <li id="login"><a href="registration.html">Login</a></li>
+                    <li id="search"><a href="search.php">Search</a></li>
+                    <li id="add"><a href="submission.php">Add a Library</a></li>
+                    <li id="about"><a href="search.php">About</a></li>
+                    <li id="login"><a href="registration.php">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <hr/>
             <p>Copyright (c) 2016 Ryan Davis</p>
             <ul class="nav-list">
-                <li id="about-footer"><a href="#">About</a></li>
+                <li id="about-footer"><a href="search.php">About</a></li>
             </ul>
         </div>
     </body>
