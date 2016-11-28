@@ -33,7 +33,10 @@
                     '</div>';
         } else {
             echo '<div class="form vertical-form vertical-form-left">';
-            echo '<h1 class="main-header">Sucessfully logged in</h1>';
+            echo '<h1 class="main-header">Logged in as '.$_SESSION['login-email'].'</h1>';
+            echo '<form method="POST">';
+            echo '<input type="submit" value="Logout" name="logout">';
+            echo '</form>';
             echo '</div>';
         }
         echo '</div>';

@@ -41,8 +41,16 @@
                 $login = false;
                 $errors = array();
                 $numErrors = 0;
-                
-                if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
+
+                session_start();
+                if(isset($_POST['logout'])) {
+                    session_unset();
+                    session_destroy();
+                }
+                else if(isset($_SESSION['login-email'])) {
+                    $login = true; 
+                }
+                else if (!isset($_SESSION['login-email']) && isset($_POST['login-email']) && isset($_POST['login-password'])) {
                     if (!validatePattern($errors, $_POST, 'login-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/')) {
                         $numErrors++;
                     }
@@ -63,6 +71,7 @@
                             foreach ($stmt as $row) {
                                 if ($row["count"] == 1) {
                                     $login = true;
+                                    $_SESSION['login-email'] = $_POST['login-email'];
                                     echo "\nLogin valid";
                                 } else {
                                     $errors['login-email'] = "User/password combo doesn't exist";
