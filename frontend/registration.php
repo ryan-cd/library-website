@@ -40,34 +40,40 @@
                 require_once 'php-inc/accounts.php';
                 $login = false;
                 $errors = array();
+                $numErrors = 0;
                 
                 if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
-                    validatePattern($errors, $_POST, 'login-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/');
-                    validatePattern($errors, $_POST, 'login-password', '/^([a-zA-Z0-9_\.\-])/');
-                    print_r($errors);
-                    try {
-                        $pdo = new PDO($connection,$username,$password);
-                        $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
-                        $stmt->bindValue(':email', $_POST['login-email']);
-                        $stmt->bindValue(':password', $_POST['login-password']);
-                        $stmt->execute();  
-                        //$errors = $stmt->errorInfo();
-                        
-                        foreach ($stmt as $row) {
-                            if ($row["count"] == 1) {
-                                $login = true;
-                                echo "\nLogin valid";
-                            } else {
-                                echo "\nLogin invalid";
-                            }
-                        }
-                    } catch (PDOException $e) {
-                        die ("Database error. ".$e);
+                    if (!validatePattern($errors, $_POST, 'login-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/')) {
+                        $numErrors++;
                     }
-                } else {
-                    $errors['login-email'] = "";
-                    $errors['login-password'] = "";
-                }
+                    if(!validatePattern($errors, $_POST, 'login-password', '/^([a-zA-Z0-9_\.\-])/')) {
+                        $numErrors++;
+                    }
+                    print_r($errors);
+                    print_r($numErrors);
+                    if($numErrors == 0) {
+                        try {
+                            $pdo = new PDO($connection,$username,$password);
+                            $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                            $stmt->bindValue(':email', $_POST['login-email']);
+                            $stmt->bindValue(':password', $_POST['login-password']);
+                            $stmt->execute();  
+                            //$errors = $stmt->errorInfo();
+                            if (!isset($errors['login-email']))
+                            foreach ($stmt as $row) {
+                                if ($row["count"] == 1) {
+                                    $login = true;
+                                    echo "\nLogin valid";
+                                } else {
+                                    $errors['login-email'] = "User/password combo doesn't exist";
+                                    echo "\nLogin invalid";
+                                }
+                            }
+                        } catch (PDOException $e) {
+                            die ("Database error. ".$e);
+                        }
+                    }
+                } 
             
                 generateForms($errors, $login);
             ?>

@@ -1,12 +1,17 @@
 <?php
     function generateForms($errors, $complete) {
+        if (!isset($errors['login-email']))
+            $errors['login-email'] = "";
+        if (!isset($errors['login-password']))
+            $errors['login-password'] = "";
+
         echo '<div id="banner">';
         if (!$complete) {
             echo 
                     '<!-- The two following forms will appear on the left and right sides of the page. -->'.
                     '<div class="form vertical-form vertical-form-left">'.
                         '<h1 class="main-header">Login</h1>'.
-                        '<form method="post" name="search" onsubmit="">'.
+                        '<form method="post" name="search" onsubmit="return validateLogin();">'.
                             '<input type="email" id="login-email" placeholder="Email" name="login-email">'.
                             '<p id="login-email-error">'.$errors['login-email'].'</p>'.
                             '<input type="password" id="login-password" placeholder="Password" name="login-password">'.
