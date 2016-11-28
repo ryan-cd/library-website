@@ -18,11 +18,7 @@
                 $numErrors = 0;
 
                 session_start();
-                print_r($_POST);
-                print_r($_SESSION);
-                print_r("\nResult:");
-                echo(!isset($_SESSION['login-email']) && isset($_POST['registration-email']) && isset($_POST['registration-password']) && isset($_POST['registration-password-confirm']));
-                //echo(!isset($_SESSION['login-email']) && isset($_POST['login-email']) && isset($_POST['login-password']));
+
                 //Handle logout 
                 if(isset($_POST['logout'])) {
                     session_unset();
