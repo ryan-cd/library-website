@@ -21,8 +21,8 @@
                     '</div>'.
                     '<div class="form vertical-form vertical-form-right">'.
                         '<h1 class="main-header">Register</h1>'.
-                        '<form action="search.html" method="get" name="search" onsubmit="return validateRegistration();">'.
-                            '<input type="email" id="registration-email" placeholder="Email" name="registration-username">'. 
+                        '<form method="post" name="search" onsubmit="return validateRegistration();">'.
+                            '<input type="email" id="registration-email" placeholder="Email" name="registration-email">'. 
                             '<p id="registration-email-error"></p>'.
                             '<input type="password" id="registration-password" placeholder="Password" name="registration-password">'.
                             '<p id="registration-password-error"></p>'.

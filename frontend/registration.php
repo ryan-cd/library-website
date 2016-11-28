@@ -9,31 +9,6 @@
         ?>  
         
         <div class="content">
-            <!--<div id="banner">-->
-                <!-- The two following forms will appear on the left and right sides of the page. -->
-                <!--<div class="form vertical-form vertical-form-left">
-                    <h1 class="main-header">Login</h1>
-                    <form method="post" name="search" onsubmit="return validateLogin();">
-                        <input type="email" id="login-email" placeholder="Email" name="login-email">
-                        <p id="login-email-error"></p>
-                        <input type="password" id="login-password" placeholder="Password" name="login-password">
-                        <p id="login-password-error"></p>
-                        <input type="submit" value="Login">
-                    </form>
-                </div>
-                <div class="form vertical-form vertical-form-right">
-                    <h1 class="main-header">Register</h1>
-                    <form action="search.html" method="get" name="search" onsubmit="return validateRegistration();">
-                        <input type="email" id="registration-email" placeholder="Email" name="registration-username"> 
-                        <p id="registration-email-error"></p>
-                        <input type="password" id="registration-password" placeholder="Password" name="registration-password">
-                        <p id="registration-password-error"></p>
-                        <input type="password" id="registration-password-confirm" placeholder="Confirm Password" name="registration-password-confirm">
-                        <p id="registration-password-confirm-error"></p>
-                        <input type="submit" value="Register">
-                    </form>
-                </div>
-            </div>-->
             <?php 
                 require_once 'php-inc/database.php';
                 require_once 'php-inc/validate.inc';
@@ -43,13 +18,21 @@
                 $numErrors = 0;
 
                 session_start();
+                print_r($_POST);
+                print_r($_SESSION);
+                print_r("\nResult:");
+                echo(!isset($_SESSION['login-email']) && isset($_POST['registration-email']) && isset($_POST['registration-password']) && isset($_POST['registration-password-confirm']));
+                //echo(!isset($_SESSION['login-email']) && isset($_POST['login-email']) && isset($_POST['login-password']));
+                //Handle logout 
                 if(isset($_POST['logout'])) {
                     session_unset();
                     session_destroy();
                 }
+                //handle user already being logged in
                 else if(isset($_SESSION['login-email'])) {
                     $login = true; 
                 }
+                //handle user login form
                 else if (!isset($_SESSION['login-email']) && isset($_POST['login-email']) && isset($_POST['login-password'])) {
                     if (!validatePattern($errors, $_POST, 'login-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/')) {
                         $numErrors++;
@@ -57,8 +40,8 @@
                     if(!validatePattern($errors, $_POST, 'login-password', '/^([a-zA-Z0-9_\.\-])/')) {
                         $numErrors++;
                     }
-                    print_r($errors);
-                    print_r($numErrors);
+                    //print_r($errors);
+                    //print_r($numErrors);
                     if($numErrors == 0) {
                         try {
                             $pdo = new PDO($connection,$username,$password);
@@ -66,16 +49,17 @@
                             $stmt->bindValue(':email', $_POST['login-email']);
                             $stmt->bindValue(':password', $_POST['login-password']);
                             $stmt->execute();  
-                            //$errors = $stmt->errorInfo();
-                            if (!isset($errors['login-email']))
-                            foreach ($stmt as $row) {
-                                if ($row["count"] == 1) {
-                                    $login = true;
-                                    $_SESSION['login-email'] = $_POST['login-email'];
-                                    echo "\nLogin valid";
-                                } else {
-                                    $errors['login-email'] = "User/password combo doesn't exist";
-                                    echo "\nLogin invalid";
+                            //$query_errors = $stmt->errorInfo();
+                            if (!isset($errors['login-email'])) {
+                                foreach ($stmt as $row) {
+                                    if ($row["count"] == 1) {
+                                        $login = true;
+                                        $_SESSION['login-email'] = $_POST['login-email'];
+                                        echo "\nLogin valid";
+                                    } else {
+                                        $errors['login-email'] = "User/password combo doesn't exist";
+                                        echo "\nLogin invalid";
+                                    }
                                 }
                             }
                         } catch (PDOException $e) {
@@ -83,7 +67,45 @@
                         }
                     }
                 } 
-            
+                //handle user registration form
+                else if (!isset($_SESSION['login-email']) 
+                            && isset($_POST['registration-email']) 
+                            && isset($_POST['registration-password']) 
+                            && isset($_POST['registration-password-confirm'])) {
+                    if (!validatePattern($errors, $_POST, 'registration-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/')) {
+                        $numErrors++;
+                    }
+                    if(!validatePattern($errors, $_POST, 'registration-password', '/^([a-zA-Z0-9_\.\-])/')) {
+                        $numErrors++;
+                    }
+                    if ($_POST['registration-password'] != $_POST['registration-password-confirm']) {
+                        $errors['registration-password-confirm'] = "Passwords don't match";
+                        $numErrors++;
+                    }
+                    print_r($errors);
+                    print_r($numErrors);
+                    if($numErrors == 0) {
+                        try {
+                            $pdo = new PDO($connection,$username,$password);
+                            //$stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                            $stmt = $pdo->prepare('INSERT INTO `users`(`id`, `email`, `password`) VALUES (NULL,:email,:password)');
+                            $stmt->bindValue(':email', $_POST['registration-email']);
+                            $stmt->bindValue(':password', $_POST['registration-password']);
+                            $stmt->execute();  
+                            $query_errors = $stmt->errorInfo();
+                            //print_r($query_errors);
+                            if (!isset($errors['registration-email']))
+                            { 
+                                    $login = true;
+                                    $_SESSION['login-email'] = $_POST['registration-email'];
+                                    echo "\nLogin valid";
+                            } 
+                        } catch (PDOException $e) {
+                            die ("Database error. ".$e);
+                        }
+                    }
+                } 
+
                 generateForms($errors, $login);
             ?>
         </div>
