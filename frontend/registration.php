@@ -9,9 +9,9 @@
         ?>  
         
         <div class="content">
-            <div id="banner">
+            <!--<div id="banner">-->
                 <!-- The two following forms will appear on the left and right sides of the page. -->
-                <div class="form vertical-form vertical-form-left">
+                <!--<div class="form vertical-form vertical-form-left">
                     <h1 class="main-header">Login</h1>
                     <form method="post" name="search" onsubmit="return validateLogin();">
                         <input type="email" id="login-email" placeholder="Email" name="login-email">
@@ -33,30 +33,46 @@
                         <input type="submit" value="Register">
                     </form>
                 </div>
-            </div>
-        </div>
-        <?php require 'php-inc/database.php';
-        if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
-            try {
-                $pdo = new PDO($connection,$username,$password);
-                $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
-                $stmt->bindValue(':email', $_POST['login-email']);
-                $stmt->bindValue(':password', $_POST['login-password']);
-                $stmt->execute();  
-                $errors = $stmt->errorInfo();
+            </div>-->
+            <?php 
+                require_once 'php-inc/database.php';
+                require_once 'php-inc/validate.inc';
+                require_once 'php-inc/accounts.php';
+                $login = false;
+                $errors = array();
                 
-                foreach ($stmt as $row) {
-                    if ($row["count"] == 1) {
-                        echo "Login valid";
-                    } else {
-                        echo "Login invalid";
+                if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
+                    validatePattern($errors, $_POST, 'login-email', '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,})+$/');
+                    validatePattern($errors, $_POST, 'login-password', '/^([a-zA-Z0-9_\.\-])/');
+                    print_r($errors);
+                    try {
+                        $pdo = new PDO($connection,$username,$password);
+                        $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                        $stmt->bindValue(':email', $_POST['login-email']);
+                        $stmt->bindValue(':password', $_POST['login-password']);
+                        $stmt->execute();  
+                        //$errors = $stmt->errorInfo();
+                        
+                        foreach ($stmt as $row) {
+                            if ($row["count"] == 1) {
+                                $login = true;
+                                echo "\nLogin valid";
+                            } else {
+                                echo "\nLogin invalid";
+                            }
+                        }
+                    } catch (PDOException $e) {
+                        die ("Database error. ".$e);
                     }
+                } else {
+                    $errors['login-email'] = "";
+                    $errors['login-password'] = "";
                 }
-            } catch (PDOException $e) {
-                die ("Database error. ".$e);
-            }
-        }
-        ?>
+            
+                generateForms($errors, $login);
+            ?>
+        </div>
+        
 
         <?php include "php-inc/footer.inc";
         ?>  
