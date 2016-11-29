@@ -13,11 +13,11 @@
             <div id="banner">
                 <div class="form vertical-form vertical-form-center">
                     <h1 class="main-header">Find a library</h1>
-                    <form action="search.html" method="get" name="search">
+                    <form action="results_sample.php" method="get" name="search">
                         <input type="text" id="library-location" placeholder="Enter a city" name="city">
                         <input type="checkbox" id="my-location-checkbox" value="Use my location"  onclick="getLocation()"> 
                         <label for="my-location-checkbox">Use my location</label>
-                        <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="library-name"> 
+                        <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="name"> 
                         <select name="rating" id="advanced-search-rating" class="advanced-search">
                             <option value="Minimum rating">Minimum Rating</option>
                             <option value="5 Star">5 Star</option>

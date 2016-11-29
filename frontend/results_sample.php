@@ -11,9 +11,50 @@
         
         <div class="content">
             <hr />
+            <?php
+                require_once 'php-inc/database.php';
+                require_once 'php-inc/result.php';
+                echo'<!-- The spacer class adds vertical space -->';
+                echo '<div class="spacer"></div>';
+                echo '<div class="spacer"></div>';
+                
+                if (!isset($_GET["name"])) 
+                    $name = '';
+                if (!isset($_GET["location"]))
+                    $location = '';
+                if (!isset($_GET["rating"]))
+                    $rating = '';
+                echo '<div class="results">';
+                echo '<div id="map"></div>';
+               
+                try {
+                    $pdo = new PDO($connection,$username,$password);
+                    $query = 'SELECT * FROM `objects`';
+                    /*if($name != '') {
+                        $query = $query.(' and name = '.$name);
+                    }
+                    if ($location != '') {
+                        $query = $query.(' and location = '.$location);
+                    }
+                    if ($rating != '') {
+                        $query = $query.(' and rating = '.$rating);
+                    }*/
+                    $stmt = $pdo->prepare($query);
+                    $stmt->execute();
+                    
+                    foreach ($stmt as $row) { 
+                        $location = "Coordinates: ".$row["latitude"].", ".$row["longitude"];
+                        generateResult($row["id"], $row["name"], $row["description"], $location, $row["rating"]);
+                    }
+                } catch (PDOException $e) {
+                    die ("Database error " + $e);
+                }
+                
+
+            ?>
             <!-- The spacer class adds vertical space -->
-            <div class="spacer"></div>
-            <div class="searchbars">
+            <!--<div class="spacer"></div>-->
+            <!--div class="searchbars">
                 <div class="form horizontal-form">
                     <form action="search.html" method="get" name="search">
                         <input type="text" id="city" value="Hamilton" name="city">
@@ -28,12 +69,12 @@
                         </select>
                     </form>
                 </div>
-            </div>
+            </div-->
             
-            <div class="spacer"></div>
-            <div class="results">
+            <!--div class="spacer"></div-->
+            <!--div class="results"-->
             
-                <div id="map"></div>
+                <!--div id="map"></div-->
                 <!-- 
                     The following script loads the map into the page. This is the standard way to create a map, as shown
                     on the Google tutorial: https://developers.google.com/maps/documentation/javascript/tutorial.
@@ -43,8 +84,11 @@
                 <script>
                     document.write("<script type='text/javascript' src='" + apiKey.url + "drawMap' async defer><\/scr" + "ipt>");
                 </script>
+                
+                <?php
+                ?>
                 <!-- Result objects consist of text and a rating to the right, and an image on the left -->
-                <div class="result">
+                <!--div class="result">
                     <img src="images/health-sci-library.jpg" class="result-thumb" alt="health sci library">
                     <div class="result-right">
                         <a href="individual_sample.php" class="result-title">Health Sciences Library</a>
@@ -61,7 +105,7 @@
                         <p class="result-address">1280 Main Street West, Hamilton, ON</p>
                         <img src="images/full-stars.png" class="result-rating" alt="rating">
                     </div>
-                </div>
+                </div-->
                 
             </div>
             
