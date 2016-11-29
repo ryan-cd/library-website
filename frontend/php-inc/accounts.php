@@ -4,7 +4,12 @@
             $errors['login-email'] = "";
         if (!isset($errors['login-password']))
             $errors['login-password'] = "";
-
+        if (!isset($errors['registration-email']))
+            $errors['registration-email'] = "";
+        if (!isset($errors['registration-password']))
+            $errors['registration-password'] = "";
+        if (!isset($errors['registration-password-confirm']))
+            $errors['registration-password-confirm'] = "";
         echo '<div id="banner">';
         if (!$complete) {
             echo 
