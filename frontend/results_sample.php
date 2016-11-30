@@ -25,8 +25,12 @@
                 if (isset($_GET["name"])) 
                     $name = $_GET["name"];
                 if (isset($_GET["location"])) {
+                    /* The following lines convert the (lat, long) coordinate pair into two separate
+                    variables with precision to the 1/100th.*/
                     $latitude = substr($_GET["location"], 0, strpos($_GET["location"], ","));
-                    $longitude = substr($_GET["location"], strpos($_GET["location"], " "+1));
+                    $latitude = substr($latitude, 0, strpos($latitude, ".") + 3);
+                    $longitude = substr($_GET["location"], strpos($_GET["location"], " ")+1);
+                    $longitude = substr($longitude, 0, strpos($longitude, ".") + 3);
                 }
                 if (isset($_GET["rating"]))
                     $rating = $_GET["rating"];
@@ -41,12 +45,12 @@
                         $query = $query.(' and name = "'.$name.'"');
                     }
                     if ($latitude != '' && $longitude != '') {
-                        $query = $query.(' and latitude = "'.$latitude.'" and longitude = "'.$longitude.'"');
+                        $query = $query.(' and latitude LIKE "'.$latitude.'%" and longitude LIKE "'.$longitude.'%"');
                     }
                     if ($rating != '') {
                         $query = $query.(' and rating >= '.$rating);
                     }
-                    print_r($query);
+                    //print_r($query);
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
                     
