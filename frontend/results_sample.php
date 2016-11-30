@@ -17,28 +17,36 @@
                 echo'<!-- The spacer class adds vertical space -->';
                 echo '<div class="spacer"></div>';
                 echo '<div class="spacer"></div>';
-                
-                if (!isset($_GET["name"])) 
-                    $name = '';
-                if (!isset($_GET["location"]))
-                    $location = '';
-                if (!isset($_GET["rating"]))
-                    $rating = '';
+                $name = '';
+                $latitude = '';
+                $longitude = '';
+                $rating = '';
+
+                if (isset($_GET["name"])) 
+                    $name = $_GET["name"];
+                if (isset($_GET["location"])) {
+                    $latitude = substr($_GET["location"], 0, strpos($_GET["location"], ","));
+                    $longitude = substr($_GET["location"], strpos($_GET["location"], " "+1));
+                }
+                if (isset($_GET["rating"]))
+                    $rating = $_GET["rating"];
                 echo '<div class="results">';
                 echo '<div id="map"></div>';
                
                 try {
                     $pdo = new PDO($connection,$username,$password);
-                    $query = 'SELECT * FROM `objects`';
-                    /*if($name != '') {
-                        $query = $query.(' and name = '.$name);
+                    $query = 'SELECT * FROM `objects` where 1';
+                    
+                    if($name != '') {
+                        $query = $query.(' and name = "'.$name.'"');
                     }
-                    if ($location != '') {
-                        $query = $query.(' and location = '.$location);
+                    if ($latitude != '' && $longitude != '') {
+                        $query = $query.(' and latitude = "'.$latitude.'" and longitude = "'.$longitude.'"');
                     }
                     if ($rating != '') {
-                        $query = $query.(' and rating = '.$rating);
-                    }*/
+                        $query = $query.(' and rating >= '.$rating);
+                    }
+                    print_r($query);
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
                     

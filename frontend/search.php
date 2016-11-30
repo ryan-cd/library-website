@@ -14,17 +14,17 @@
                 <div class="form vertical-form vertical-form-center">
                     <h1 class="main-header">Find a library</h1>
                     <form action="results_sample.php" method="get" name="search">
-                        <input type="text" id="library-location" placeholder="Enter a city" name="city">
+                        <input type="text" id="library-location" placeholder="Enter a city" name="location">
                         <input type="checkbox" id="my-location-checkbox" value="Use my location"  onclick="getLocation()"> 
                         <label for="my-location-checkbox">Use my location</label>
                         <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="name"> 
                         <select name="rating" id="advanced-search-rating" class="advanced-search">
-                            <option value="Minimum rating">Minimum Rating</option>
-                            <option value="5 Star">5 Star</option>
-                            <option value="4 Star">4 Star</option>
-                            <option value="3 Star">3 Star</option>
-                            <option value="2 Star">2 Star</option>
-                            <option value="1 Star">1 Star</option>
+                            <option value="1">Minimum Rating</option>
+                            <option value="5">Min 5 Stars</option>
+                            <option value="4">Min 4 Stars</option>
+                            <option value="3">Min 3 Stars</option>
+                            <option value="2">Min 2 Stars</option>
+                            <option value="1">Min 1 Star</option>
                         </select>
                         <input type="submit" id="search-button" value="Search">
                     </form>

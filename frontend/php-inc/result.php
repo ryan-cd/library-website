@@ -8,7 +8,7 @@
                     '<a href="individual_sample.php?id='.$id.'"'.' class="result-title">'.$name.'</a>'.
                     '<p class="result-description">'.$description.'</p>'.
                     '<p class="result-address">'.$location.'</p>'.
-                    '<img src="images/half-stars.png" class="result-rating" alt="rating">'.
+                    '<p class="result-description">Rating: '.$rating.'/5</p>'.
                 '</div>'.
             '</div>';
 }
