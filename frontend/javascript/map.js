@@ -15,6 +15,7 @@ function initHealthSciMap() {
 with the specified description. Otherwise it will just add the marker to the existing map */
 function addMarker(coords, info) {
     var thode = {lat: 43.2609475, lng: -79.9222869};
+    //alert((coords));
     if (map === undefined) {
         // Create a map object
         map = new google.maps.Map(document.getElementById('map'), {
@@ -42,13 +43,13 @@ function addMarker(coords, info) {
 
 /* This function will create a map and draw both library markers onto it */
 function drawMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    /*map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: {lat: 43.2593068, lng: -79.92134}
-    });
+    })*/
     
-    initThodeMap();
-    initHealthSciMap();
+    //initThodeMap();
+    //initHealthSciMap();
 }
 
 /* Returns a formatted marker information string with the appropriate name/description */
