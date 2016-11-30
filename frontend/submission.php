@@ -20,8 +20,9 @@
                     if(!validatePattern($errors, $_POST, 'name', '/^([a-zA-Z0-9_\.\-])/')) {
                         $numErrors++;
                     }
-                    if(!validatePattern($errors, $_POST, 'description', '/^([a-zA-Z0-9_\.\-]{10,})/')) {
+                    if (strlen($_POST["description"]) < 10) {
                         $numErrors++;
+                        $errors["description"] = "Min 10 characters";
                     }
                     if(!validatePattern($errors, $_POST, 'location', '/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/')) {
                         $numErrors++;
@@ -30,12 +31,15 @@
                     //print_r($numErrors);
                     if($numErrors == 0) {
                         try {
+                            $latitude = substr($_POST["location"], 0, strpos($_POST["location"], ","));
+                            $longitude = substr($_POST["location"], strpos($_POST["location"], " ")+1);
+
                             $pdo = new PDO($connection,$username,$password);
                             $stmt = $pdo->prepare('INSERT INTO `objects`(`id`, `name`, `description`, `latitude`, `longitude`) VALUES (NULL,:name,:description,:latitude,:longitude)');
                             $stmt->bindValue(':name', $_POST['name']);
                             $stmt->bindValue(':description', $_POST['description']);
-                            $stmt->bindValue(':latitude', 1);
-                            $stmt->bindValue(':longitude', 1);
+                            $stmt->bindValue(':latitude', $latitude);
+                            $stmt->bindValue(':longitude', $longitude);
 
                             $stmt->execute();  
                             //$query_errors = $stmt->errorInfo();

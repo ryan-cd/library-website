@@ -97,27 +97,7 @@
                     document.write("<script type='text/javascript' src='" + apiKey.url + "drawMap' async defer><\/scr" + "ipt>");
                 </script>
                 
-                <?php
-                ?>
-                <!-- Result objects consist of text and a rating to the right, and an image on the left -->
-                <!--div class="result">
-                    <img src="images/health-sci-library.jpg" class="result-thumb" alt="health sci library">
-                    <div class="result-right">
-                        <a href="individual_sample.php" class="result-title">Health Sciences Library</a>
-                        <p class="result-description">This library is for studying health sciences.</p>
-                        <p class="result-address">1280 Main Street West, Hamilton, ON</p>
-                        <img src="images/half-stars.png" class="result-rating" alt="rating">
-                    </div>
-                </div>
-                <div class="result">
-                    <img src="images/thode.jpg" class="result-thumb" alt="thode library">
-                    <div class="result-right">
-                        <a href="individual_sample.php" class="result-title">H.G. Thode Library</a>
-                        <p class="result-description">Engineering and Sciences Library</p>
-                        <p class="result-address">1280 Main Street West, Hamilton, ON</p>
-                        <img src="images/full-stars.png" class="result-rating" alt="rating">
-                    </div>
-                </div-->
+                
                 
             </div>
             
