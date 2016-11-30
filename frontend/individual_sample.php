@@ -16,9 +16,27 @@
             <div class="spacer"></div>
             <!-- The review section and reviews function the same way as the result section and results from registration_sample.html -->
             <div class="results">
-                <a href="results_sample.php" class="back-link">Back to results</a>
-                <h1 class="main-header">Thode Library</h1>
-                <img src="images/thode.jpg" class="large-profile-img" alt="thode library">
+                <?php
+                    require_once 'php-inc/object.php';
+                    require_once 'php-inc/database.php';
+                    try {
+                        $pdo = new PDO($connection,$username,$password);
+                        $query = 'SELECT * FROM `objects` where `id`=:id';
+  
+                        $stmt = $pdo->prepare($query);
+                        $stmt->bindValue(':id', $_GET["id"]);
+
+                        $stmt->execute();
+                        
+                        foreach ($stmt as $row) { 
+                            generateObject($row["id"], $row["name"], $row["description"], $row["rating"]); 
+                        }
+                    } catch (PDOException $e) {
+                        die ("Database error " + $e);
+                    }
+                    //generateObject(3, "Thode Library", "Test");
+                ?>
+                
                 
                 <div id="map"></div>
                 <!-- 
