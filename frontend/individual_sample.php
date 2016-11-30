@@ -45,15 +45,11 @@
                     concatenated strings in a script source was learned from http://stackoverflow.com/questions/11150409/use-js-variable-to-set-the-src-attribute-for-script-tag
                 -->
                 <script>
-                    document.write("<script type='text/javascript' src='" + apiKey.url + "drawMap'><\/scr" + "ipt>");
+                    document.write("<script type='text/javascript' src='" + apiKey.url + "init'><\/scr" + "ipt>");
                 </script>
                 
                 <?php
-                    echo "<script type='text/javascript'>\n";
-                    echo "var marker = {lat: parseFloat(".$row["latitude"]."), lng: parseFloat(".$row["longitude"].")};\n";
-
-                    echo "addMarker(marker, 'test')";
-                    echo "</script>\n";
+                    generateMap($row); 
                 ?>
                 <div class="spacer"></div>
                 <div class="spacer"></div>

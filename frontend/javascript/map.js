@@ -41,22 +41,15 @@ function addMarker(coords, info) {
     });
 }
 
-/* This function will create a map and draw both library markers onto it */
-function drawMap() {
-    /*map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: {lat: 43.2593068, lng: -79.92134}
-    })*/
-    
-    //initThodeMap();
-    //initHealthSciMap();
+function init() {
+
 }
 
 /* Returns a formatted marker information string with the appropriate name/description */
-function createInfoString (name, description) {
+function createInfoString (id, name, description) {
     return '<div id="content">' +
                 '<div id="siteNotice">' +
-                    '<h2><a href="individual_sample.php">' + name + '</a></h1>' +
+                    '<h2><a href="individual_sample.php?id='+id+'">' + name + '</a></h1>' +
                     '<div>' +
                         '<p>' + description + '</p>' +
                     '</div>' + 

@@ -8,12 +8,22 @@
     <body>
         <?php include "php-inc/header.inc";
         ?>   
+         <!-- 
+            The following script loads the map into the page. This is the standard way to create a map, as shown
+            on the Google tutorial: https://developers.google.com/maps/documentation/javascript/tutorial.
+            The api key is in a separate file to keep it out of version control. This method of usinig 
+            concatenated strings in a script source was learned from http://stackoverflow.com/questions/11150409/use-js-variable-to-set-the-src-attribute-for-script-tag
+        -->
+        <script>
+            document.write("<script type='text/javascript' src='" + apiKey.url + "init'><\/scr" + "ipt>");
+        </script>
         
         <div class="content">
             <hr />
             <?php
                 require_once 'php-inc/database.php';
                 require_once 'php-inc/result.php';
+                require_once 'php-inc/object.php';
                 echo'<!-- The spacer class adds vertical space -->';
                 echo '<div class="spacer"></div>';
                 echo '<div class="spacer"></div>';
@@ -57,6 +67,7 @@
                     foreach ($stmt as $row) { 
                         $location = "Coordinates: ".$row["latitude"].", ".$row["longitude"];
                         generateResult($row["id"], $row["name"], $row["description"], $location, $row["rating"]);
+                        generateMap($row);
                     }
                 } catch (PDOException $e) {
                     die ("Database error " + $e);
@@ -83,22 +94,6 @@
                 </div>
             </div-->
             
-            <!--div class="spacer"></div-->
-            <!--div class="results"-->
-            
-                <!--div id="map"></div-->
-                <!-- 
-                    The following script loads the map into the page. This is the standard way to create a map, as shown
-                    on the Google tutorial: https://developers.google.com/maps/documentation/javascript/tutorial.
-                    The api key is in a separate file to keep it out of version control. This method of usinig 
-                    concatenated strings in a script source was learned from http://stackoverflow.com/questions/11150409/use-js-variable-to-set-the-src-attribute-for-script-tag
-                -->
-                <script>
-                    document.write("<script type='text/javascript' src='" + apiKey.url + "drawMap' async defer><\/scr" + "ipt>");
-                </script>
-                
-                
-                
             </div>
             
             <?php include "php-inc/footer.inc";
