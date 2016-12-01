@@ -12,4 +12,16 @@ function generateMap($row) {
     echo "addMarker(marker, createInfoString('".$row["id"]."', '".$row["name"]."', '".$row["description"]."'));";
     echo "</script>\n";
 }
+
+function generateReview($row) {
+    echo
+        '<div class="result">'.
+            '<img src="images/woman.jpg" class="result-thumb" alt="user-image">'.
+            '<div class="result-right">'.
+                '<a href="#" class="result-title">'.$row["user"].'</a>'.
+                '<p class="result-description">'.$row["rating"].'/5 stars</p>'.
+                '<p class="result-description">'.$row["review"].'</p>'.
+            '</div>'.
+        '</div>';
+}
 ?>
