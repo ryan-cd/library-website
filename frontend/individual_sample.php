@@ -17,6 +17,8 @@
                 <!-- The review section and reviews function the same way as the result section and results from registration_sample.html -->
                 <div class="results">
                     <?php
+                    session_start();
+                    
                         require_once 'php-inc/object.php';
                         require_once 'php-inc/database.php';
                         try {
@@ -30,6 +32,16 @@
                             
                             foreach ($stmt as $row) { 
                                 generateObject($row["id"], $row["name"], $row["description"], $row["rating"]); 
+                            }
+                            //If the user had posted a review, add it to the database
+                            if(isset($_SESSION["login-email"]) && isset($_POST["review"]) && isset($_POST["rating"])) {
+                                $query = 'INSERT INTO `reviews`(`id`, `user`, `review`, `rating`) VALUES (:id,:user,:review,:rating)';
+                                $stmt = $pdo->prepare($query);
+                                $stmt->bindValue(':id', $_GET["id"]);
+                                $stmt->bindValue(':user', $_SESSION["login-email"]);
+                                $stmt->bindValue(':review', $_POST["review"]);
+                                $stmt->bindValue(':rating', $_POST["rating"]);
+                                $stmt->execute();
                             }
                         } catch (PDOException $e) {
                             die ("Database error " + $e);
@@ -50,6 +62,8 @@
                     <div class="spacer"></div>
                     <?php
                         generateMap($row); 
+
+                        generateAddReview();
                         try {
                             $query = 'SELECT * FROM `reviews` where `id`=:id';
     

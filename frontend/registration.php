@@ -51,10 +51,8 @@
                                     if ($row["count"] == 1) {
                                         $login = true;
                                         $_SESSION['login-email'] = $_POST['login-email'];
-                                        echo "\nLogin valid";
                                     } else {
                                         $errors['login-email'] = "User/password combo doesn't exist";
-                                        echo "\nLogin invalid";
                                     }
                                 }
                             }
@@ -78,8 +76,7 @@
                         $errors['registration-password-confirm'] = "Passwords don't match";
                         $numErrors++;
                     }
-                    print_r($errors);
-                    print_r($numErrors);
+                    
                     if($numErrors == 0) {
                         try {
                             $pdo = new PDO($connection,$username,$password);
