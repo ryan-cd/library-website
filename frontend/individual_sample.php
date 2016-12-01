@@ -47,7 +47,7 @@
                     <script>
                         document.write("<script type='text/javascript' src='" + apiKey.url + "init'><\/scr" + "ipt>");
                     </script>
-                    
+                    <div class="spacer"></div>
                     <?php
                         generateMap($row); 
                         try {
