@@ -11,7 +11,7 @@
             '<div id="banner">'.
                 '<div class="form vertical-form vertical-form-center">'.
                     '<h1 class="main-header">Add a library</h1>'.
-                    '<form method="post" name="search" onsubmit="return validateLibrarySubmission();">'.
+                    '<form method="post" enctype="multipart/form-data" name="search" onsubmit="return validateLibrarySubmission();">'.
                         '<input type="text" id="library-name" placeholder="Enter library name" name="name" required> '.
                         '<p id="library-name-error">'.$errors['name'].'</p>'.
                         '<input id="library-description" type="text" placeholder="Enter a description" name="description" required>'.

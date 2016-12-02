@@ -5,3 +5,6 @@
 *API*
 CodeDeploy*
 database.php
+*config.*
+awsSdk/*
+

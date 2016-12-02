@@ -11,9 +11,41 @@
         <div class="content">
             
             <?php
+                use Aws\S3\Exception\S3Exception;
                 require_once 'php-inc/database.php';
                 require_once 'php-inc/validate.inc';
                 require_once 'php-inc/submission_form.php';
+                require_once '../s3.php';
+
+                //Attribution: This image code was taken from https://www.youtube.com/watch?v=BR787aefMfY
+                if (isset ($_FILES['image-upload'])) {
+                    $file = $_FILES['image-upload'];
+
+                    $name = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $extension = explode('.', $name);
+                    $extension = strtolower(end($extension));
+
+                     $key = md5(uniqid());
+                     
+                     $tmp_file_name = "{$key}.{$extension}";
+                     $tmp_file_path = "images/{$tmp_file_name}";
+
+                     move_uploaded_file($tmp_name, $tmp_file_path);
+
+                     try {
+                        $s3->putObject([
+                            'Bucket' => $config['s3']['bucket'],
+                            'Key' => "uploads/{$name}",
+                            'Body' => fopen($tmp_file_path, 'rb'),
+                            'ACL' => 'public-read'
+                        ]);
+                        unlink($tmp_file_path);
+                     } catch (S3Exception $e) {
+                         die ("Error uploading file".$e);
+                     }
+                }
+
                 $numErrors = 0;
                 $errors = array();
                 if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['location'])) {
