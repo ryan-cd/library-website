@@ -80,8 +80,17 @@
                         }
                     } 
                 }
-
-                generateForm($errors);
+                session_start();
+                // If the user is logged in, then display the submission form
+                if(isset($_SESSION["login-email"]))
+                    generateForm($errors);
+                else {
+                    echo '<div id="banner">'.
+                            '<div class="spacer"></div>'.
+                            '<div class="spacer"></div>'.
+                            '<h1 class="main-header">You must log in to post a library</h1>'.
+                          '</div>';
+                }
             ?>
         </div>
         
