@@ -36,25 +36,25 @@
                     if(!validatePattern($errors, $_POST, 'login-password', '/^([a-zA-Z0-9_\.\-])/')) {
                         $numErrors++;
                     }
-                    //print_r($errors);
-                    //print_r($numErrors);
                     if($numErrors == 0) {
                         try {
                             $pdo = new PDO($connection,$username,$password);
-                            $stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                            $stmt = $pdo->prepare('SELECT password FROM `users` where `email`=:email');
                             $stmt->bindValue(':email', $_POST['login-email']);
-                            $stmt->bindValue(':password', $_POST['login-password']);
-                            $stmt->execute();  
+                            $stmt->execute(); 
                             //$query_errors = $stmt->errorInfo();
-                            if (!isset($errors['login-email'])) {
+                            if ($stmt->rowCount() > 0) {
                                 foreach ($stmt as $row) {
-                                    if ($row["count"] == 1) {
+                                    if (password_verify($_POST["login-password"], $row["password"])) {
                                         $login = true;
                                         $_SESSION['login-email'] = $_POST['login-email'];
                                     } else {
                                         $errors['login-email'] = "User/password combo doesn't exist";
                                     }
                                 }
+                            } else {
+                                // The email address is not in the database
+                                $errors['login-email'] = "Email doesn't exist";
                             }
                         } catch (PDOException $e) {
                             die ("Database error. ".$e);
@@ -81,9 +81,11 @@
                         try {
                             $pdo = new PDO($connection,$username,$password);
                             //$stmt = $pdo->prepare('SELECT count(*) as count FROM `users` where `email`=:email and `password`=:password');
+                            $hashed_password = password_hash($_POST["registration-password"], PASSWORD_DEFAULT);
+
                             $stmt = $pdo->prepare('INSERT INTO `users`(`id`, `email`, `password`) VALUES (NULL,:email,:password)');
                             $stmt->bindValue(':email', $_POST['registration-email']);
-                            $stmt->bindValue(':password', $_POST['registration-password']);
+                            $stmt->bindValue(':password', $hashed_password);
                             $stmt->execute();  
                             $query_errors = $stmt->errorInfo();
                             //print_r($query_errors);
@@ -91,7 +93,6 @@
                             { 
                                     $login = true;
                                     $_SESSION['login-email'] = $_POST['registration-email'];
-                                    echo "\nLogin valid";
                             } 
                         } catch (PDOException $e) {
                             die ("Database error. ".$e);
