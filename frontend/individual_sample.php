@@ -23,16 +23,7 @@
                         require_once 'php-inc/database.php';
                         try {
                             $pdo = new PDO($connection,$username,$password);
-                            $query = 'SELECT * FROM `objects` where `id`=:id';
-    
-                            $stmt = $pdo->prepare($query);
-                            $stmt->bindValue(':id', $_GET["id"]);
-
-                            $stmt->execute();
                             
-                            foreach ($stmt as $row) { 
-                                generateObject($row["id"], $row["name"], $row["description"], $row["rating"]); 
-                            }
                             //If the user had posted a review, add it to the database
                             if(isset($_SESSION["login-email"]) && isset($_POST["review"]) && isset($_POST["rating"])) {
                                 $query = 'INSERT INTO `reviews`(`id`, `user`, `review`, `rating`) VALUES (:id,:user,:review,:rating)';
@@ -42,6 +33,34 @@
                                 $stmt->bindValue(':review', $_POST["review"]);
                                 $stmt->bindValue(':rating', $_POST["rating"]);
                                 $stmt->execute();
+
+                                $query = 'SELECT rating FROM `reviews` WHERE `id`=:id';
+                                $stmt = $pdo->prepare($query);
+                                $stmt->bindValue(':id', $_GET["id"]);
+                                $stmt->execute();
+
+                                $rating = 0;
+                                foreach($stmt as $row) {
+                                    $rating += $row["rating"];
+                                }
+                                $rating = $rating / $stmt->rowCount();
+
+                                $query = 'UPDATE `objects` SET `rating`=:rating WHERE `id`=:id';
+                                $stmt = $pdo->prepare($query);
+                                $stmt->bindValue(':id', $_GET["id"]);
+                                $stmt->bindValue(':rating', $rating);
+                                $stmt->execute();
+                            }
+                            /* Draw the page */
+                            $query = 'SELECT * FROM `objects` where `id`=:id';
+    
+                            $stmt = $pdo->prepare($query);
+                            $stmt->bindValue(':id', $_GET["id"]);
+
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row) { 
+                                generateObject($row["id"], $row["name"], $row["description"], $row["rating"]); 
                             }
                         } catch (PDOException $e) {
                             die ("Database error " + $e);
