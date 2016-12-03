@@ -17,7 +17,7 @@
                 require_once 'php-inc/submission_form.php';
                 require_once 's3.php';
 
-                //Attribution: This image code was taken from https://www.youtube.com/watch?v=BR787aefMfY
+                //Attribution: This image code was adapted from https://www.youtube.com/watch?v=BR787aefMfY
                 if (isset ($_FILES['image-upload'])) {
                     $file = $_FILES['image-upload'];
 
@@ -25,18 +25,33 @@
                     $tmp_name = $file['tmp_name'];
                     $extension = explode('.', $name);
                     $extension = strtolower(end($extension));
+                    
+                    //Get the ID of the next object that can be inserted. Name the image
+                    //that id, and then upload it 
+                    //(i.e. if the current highest id is 14, then the next image will be 
+                    //called 15)
+                    $key = 0;
+                    try 
+                    {
+                        $pdo = new PDO($connection,$username,$password);
+                        $stmt = $pdo->prepare('SELECT `id` FROM `objects` ORDER BY `id` DESC LIMIT 1');
+                        $stmt->execute();  
+                        foreach ($stmt as $row) {
+                            $key = $row["id"];
+                        }
+                        $key++;
+                     } catch (PDOException $e) {
+                        die ("Database error. ".$e);
+                     }
 
-                     $key = md5(uniqid());
-                     
                      $tmp_file_name = "{$key}.{$extension}";
                      $tmp_file_path = "images/{$tmp_file_name}";
-
                      move_uploaded_file($tmp_name, $tmp_file_path);
 
                      try {
                         $s3->putObject([
                             'Bucket' => $config['s3']['bucket'],
-                            'Key' => "uploads/{$name}",
+                            'Key' => "uploads/{$key}",
                             'Body' => fopen($tmp_file_path, 'rb'),
                             'ACL' => 'public-read'
                         ]);
