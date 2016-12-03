@@ -1,11 +1,12 @@
 <?php
-//Generates individual object page
+//Generates individual object page with the desired fields. Image loaded from s3
 function generatePage($id, $title, $description, $rating) {
+    $config = require('php-inc/config.php');
     echo 
         '<h1 class="main-header">'.$title.'</h1>'.
         '<h2 class="main-header">'.$description.'</h2>'.
         '<h3 class="main-header">'.$rating.'/5 stars</h3>'.
-        '<img src="images/thode.jpg" class="large-profile-img" alt="library-image">';
+        '<img src="'.$config['s3']['url'].$id.'.jpg" class="large-profile-img" alt="library-image">';
 }
 
 //Creates the map with a marker at the specified location
