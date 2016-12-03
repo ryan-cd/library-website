@@ -3,7 +3,7 @@
 
 use Aws\S3\S3Client;
 require 'awsSdk\aws-autoloader.php';
-$config = require('frontend/php-inc/config.php');
+$config = require('php-inc/config.php');
 
 $s3 = S3Client::factory([
     'key' => $config['s3']['key'],

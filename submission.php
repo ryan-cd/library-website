@@ -15,7 +15,7 @@
                 require_once 'php-inc/database.php';
                 require_once 'php-inc/validate.inc';
                 require_once 'php-inc/submission_form.php';
-                require_once '../s3.php';
+                require_once 's3.php';
 
                 //Attribution: This image code was taken from https://www.youtube.com/watch?v=BR787aefMfY
                 if (isset ($_FILES['image-upload'])) {
