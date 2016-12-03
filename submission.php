@@ -51,7 +51,7 @@
                      try {
                         $s3->putObject([
                             'Bucket' => $config['s3']['bucket'],
-                            'Key' => "uploads/{$key}",
+                            'Key' => "uploads/{$tmp_file_name}",
                             'Body' => fopen($tmp_file_path, 'rb'),
                             'ACL' => 'public-read'
                         ]);
