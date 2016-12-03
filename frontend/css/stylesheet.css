@@ -201,9 +201,9 @@ ul.nav-list {
 }
 
 .horizontal-form input[type=text],
-input[type=submit].horizontal-form,
+.horizontal-form input[type=submit],
 .horizontal-form select{
-    width: 264px;
+    width: 244px;
 }
 
 .vertical-form input[type=text],
@@ -281,10 +281,12 @@ input[type=submit].horizontal-form,
 
 /* The "results" div will contain "result" divs */
 .result {
-    height: 150px;
-    width: 500px;
+    height: 110px;
+    width: 490px;
     color: black;
     background: #ffeee3;
+    border-style: solid;
+    border-width: 1px;
 }
 
 /* This is the right portion of the full result div */
