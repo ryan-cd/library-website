@@ -1,4 +1,5 @@
 <?php
+    //Generates login and registration forms with inline errors
     function generateForms($errors, $complete) {
         if (!isset($errors['login-email']))
             $errors['login-email'] = "";

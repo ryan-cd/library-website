@@ -1,4 +1,5 @@
 <?php
+    //Generates a result element for the results page
     function generateResult ($id, $name, $description, $location, $rating) {
         echo 
             '<!-- Result objects consist of text and a rating to the right, and an image on the left -->'.

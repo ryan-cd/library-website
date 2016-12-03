@@ -14,7 +14,7 @@
                 <div class="form vertical-form vertical-form-center">
                     <h1 class="main-header">Find a library</h1>
                     <form action="results_sample.php" method="get" name="search">
-                        <input type="text" id="library-location" placeholder="Enter coords (e.g. 43.2602, -79.9205)" name="location">
+                        <input type="text" id="library-location" placeholder="Enter coords (e.g. 43.26, -79.92)" name="location">
                         <input type="checkbox" id="my-location-checkbox" value="Use my location"  onclick="getLocation()"> 
                         <label for="my-location-checkbox">Use my location</label>
                         <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter a library name" name="name"> 

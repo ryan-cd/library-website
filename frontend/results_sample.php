@@ -23,15 +23,14 @@
             <?php
                 require_once 'php-inc/database.php';
                 require_once 'php-inc/result.php';
-                require_once 'php-inc/object.php';
-                echo'<!-- The spacer class adds vertical space -->';
+                require_once 'php-inc/page.php';
                 echo '<div class="spacer"></div>';
                 echo '<div class="spacer"></div>';
                 $name = '';
                 $latitude = '';
                 $longitude = '';
                 $rating = '';
-
+                //Set variables to hold what the user searched for
                 if (isset($_GET["name"])) 
                     $name = $_GET["name"];
                 if (isset($_GET["location"])) {
@@ -39,7 +38,13 @@
                     variables with precision to the 1/100th.*/
                     $latitude = substr($_GET["location"], 0, strpos($_GET["location"], ","));
                     $latitude = substr($latitude, 0, strpos($latitude, ".") + 3);
-                    $longitude = substr($_GET["location"], strpos($_GET["location"], " ")+1);
+                    // Code to handle whether user submits location as "x,y" or "x, y"
+                    if(strpos($_GET["location"], " ") !== FALSE) {
+                        $separator = " ";
+                    } else {
+                        $separator = ",";
+                    }
+                    $longitude = substr($_GET["location"], strpos($_GET["location"], $separator)+1);
                     $longitude = substr($longitude, 0, strpos($longitude, ".") + 3);
                 }
                 if (isset($_GET["rating"]))
@@ -48,6 +53,7 @@
                 echo '<div id="map"></div>';
                
                 try {
+                    /* Retrieve search results from the database */
                     $pdo = new PDO($connection,$username,$password);
                     $query = 'SELECT * FROM `objects` where 1';
                     
@@ -60,7 +66,6 @@
                     if ($rating != '') {
                         $query = $query.(' and rating >= '.$rating);
                     }
-                    //print_r($query);
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
                     
@@ -75,25 +80,6 @@
                 
 
             ?>
-            <!-- The spacer class adds vertical space -->
-            <!--<div class="spacer"></div>-->
-            <!--div class="searchbars">
-                <div class="form horizontal-form">
-                    <form action="search.html" method="get" name="search">
-                        <input type="text" id="city" value="Hamilton" name="city">
-                        <input type="text" id="advanced-search-name" class="advanced-search" placeholder="Enter library name" name="library-name"> 
-                        <select name="rating" id="advanced-search-rating" class="advanced-search">
-                            <option value="Minimum Rating">Minimum rating</option>
-                            <option value="5 Star">5 Star</option>
-                            <option value="4 Star">4 Star</option>
-                            <option value="3 Star">3 Star</option>
-                            <option value="2 Star">2 Star</option>
-                            <option value="1 Star">1 Star</option>
-                        </select>
-                    </form>
-                </div>
-            </div-->
-            
             </div>
             
             <?php include "php-inc/footer.inc";

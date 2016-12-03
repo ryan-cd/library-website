@@ -1,4 +1,5 @@
 <?php
+    //Generates the form to submit a new object
     function generateForm($errors) {
         if (!isset($errors['name']))
             $errors['name'] = "";

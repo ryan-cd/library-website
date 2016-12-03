@@ -17,15 +17,16 @@
                 <!-- The review section and reviews function the same way as the result section and results from registration_sample.html -->
                 <div class="results">
                     <?php
+                    //Session started to find out if user has logged in
                     session_start();
-                    
-                        require_once 'php-inc/object.php';
-                        require_once 'php-inc/database.php';
+                        require_once 'php-inc/page.php'; //code to generate the page
+                        require_once 'php-inc/database.php'; //code to perform database functions
                         try {
-                            $pdo = new PDO($connection,$username,$password);
+                            $pdo = new PDO($connection,$username,$password); //connect to database
                             
                             //If the user had posted a review, add it to the database
                             if(isset($_SESSION["login-email"]) && isset($_POST["review"]) && isset($_POST["rating"])) {
+                                //Add the user review
                                 $query = 'INSERT INTO `reviews`(`id`, `user`, `review`, `rating`) VALUES (:id,:user,:review,:rating)';
                                 $stmt = $pdo->prepare($query);
                                 $stmt->bindValue(':id', $_GET["id"]);
@@ -34,6 +35,7 @@
                                 $stmt->bindValue(':rating', $_POST["rating"]);
                                 $stmt->execute();
 
+                                //Determine the new aggregate rating and add that to the database
                                 $query = 'SELECT rating FROM `reviews` WHERE `id`=:id';
                                 $stmt = $pdo->prepare($query);
                                 $stmt->bindValue(':id', $_GET["id"]);
@@ -51,7 +53,7 @@
                                 $stmt->bindValue(':rating', $rating);
                                 $stmt->execute();
                             }
-                            /* Draw the page */
+                            /* Grab the page information, and draw it */
                             $query = 'SELECT * FROM `objects` where `id`=:id';
     
                             $stmt = $pdo->prepare($query);
@@ -60,7 +62,7 @@
                             $stmt->execute();
                             
                             foreach ($stmt as $row) { 
-                                generateObject($row["id"], $row["name"], $row["description"], $row["rating"]); 
+                                generatePage($row["id"], $row["name"], $row["description"], $row["rating"]); 
                             }
                         } catch (PDOException $e) {
                             die ("Database error " + $e);
@@ -83,6 +85,7 @@
                         generateMap($row); 
 
                         generateAddReview();
+                        //Draw all the reviews
                         try {
                             $query = 'SELECT * FROM `reviews` where `id`=:id';
     

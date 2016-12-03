@@ -1,5 +1,6 @@
 <?php
-function generateObject($id, $title, $description, $rating) {
+//Generates individual object page
+function generatePage($id, $title, $description, $rating) {
     echo 
         '<h1 class="main-header">'.$title.'</h1>'.
         '<h2 class="main-header">'.$description.'</h2>'.
@@ -7,6 +8,7 @@ function generateObject($id, $title, $description, $rating) {
         '<img src="images/thode.jpg" class="large-profile-img" alt="library-image">';
 }
 
+//Creates the map with a marker at the specified location
 function generateMap($row) {
     echo "<script type='text/javascript'>\n";
     echo "var marker = {lat: parseFloat(".$row["latitude"]."), lng: parseFloat(".$row["longitude"].")};\n";
@@ -14,6 +16,7 @@ function generateMap($row) {
     echo "</script>\n";
 }
 
+//The form to add reviews
 function generateAddReview() {
     //Note session should have already been started
     if (isset($_SESSION["login-email"])) {
@@ -39,6 +42,7 @@ function generateAddReview() {
     }
 }
 
+//Draws the review of a specified user
 function generateReview($row) {
     echo
         '<div class="spacer"></div>'.

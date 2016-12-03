@@ -48,22 +48,33 @@
 
                 $numErrors = 0;
                 $errors = array();
+                //Handle when the user submits an object
                 if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['location'])) {
+                    //validate the library name
                     if(!validatePattern($errors, $_POST, 'name', '/^([a-zA-Z0-9_\.\-])/')) {
                         $numErrors++;
                     }
+                    //validate description
                     if (strlen($_POST["description"]) < 10) {
                         $numErrors++;
                         $errors["description"] = "Min 10 characters";
                     }
+                    //validate coordinates
                     if(!validatePattern($errors, $_POST, 'location', '/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/')) {
                         $numErrors++;
                     }
                     
                     if($numErrors == 0) {
                         try {
+                            //Add the new library to the database
                             $latitude = substr($_POST["location"], 0, strpos($_POST["location"], ","));
-                            $longitude = substr($_POST["location"], strpos($_POST["location"], " ")+1);
+                            //Code to handle whether user has location as "x,y" or "x, y"
+                            if(strpos($_POST["location"], " ") !== FALSE) {
+                                $separator = " ";
+                            } else {
+                                $separator = ",";
+                            }
+                            $longitude = substr($_POST["location"], strpos($_POST["location"], $separator)+1);
 
                             $pdo = new PDO($connection,$username,$password);
                             $stmt = $pdo->prepare('INSERT INTO `objects`(`id`, `name`, `description`, `latitude`, `longitude`) VALUES (NULL,:name,:description,:latitude,:longitude)');
